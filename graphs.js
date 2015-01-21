@@ -96,7 +96,7 @@ function getBuildingJSON(buildingCode, debug) {
     makeGraph(normalizedData);
     
     normalizedPiData = transformJsonToPieChartData(debugJSON);
-    //makePieChart(normalizedPiData);
+    makePieChart(normalizedPiData);
     return;
     }
 
@@ -108,8 +108,8 @@ function getBuildingJSON(buildingCode, debug) {
 
 		makeGraph(jsonData);     
         
-     //   normalizedPiData = transformJsonToPieChartData(debugJSON);
-     //   makePieChart(normalizedPiData);
+        normalizedPiData = transformJsonToPieChartData(jsonData);
+        makePieChart(normalizedPiData);
 	});
 }
 
@@ -132,9 +132,8 @@ function normalizeGraphData(json) {
 function transformJsonToPieChartData(json) {
     currentCo2 = json.currCo2;
     previousCo2 = json.prevCo2;
-    
-	currentYear = json.currYear;
-	previousYear = json.prevYear;
+    currentYear = json.currYear;
+    previousYear = json.prevYear;
     
     data = [
         {"label":previousYear.toString(), "value":previousCo2},
