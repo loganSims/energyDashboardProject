@@ -1,0 +1,118 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="IndexStyle.css">	
+		<link rel="stylesheet" type="text/css" href="ContactTable.css">	
+	</hend>
+
+	<body>
+		<div id="contact_us">			
+			<div id="contact_us_info" class="ContactTable" style="width:800px;height:150px;">
+				<table >
+				    <tr>
+				        <td>Name</td>
+						<td>Role</td>
+				        <td>E-mail</td>
+				        <td>Phone Number</td>
+						<td>Office Location</td>
+				    </tr>
+				    <tr>
+				        <td>Dr. Chris Reedy</td>
+						<td>Instructor</td>
+				        <td>Christopher.Re<span></span>edy@wwu.edu</td>
+				        <td>(360) 650-4838 </td>
+						<td>CF 463</td>
+				    </tr>
+				    <tr>
+						<td>Charles Cordova</td> 
+						<td>Member (Spring,14)</td>
+				       	<td>cord<span></span>ovc3@students.wwu.edu</td>
+				        <td></td>
+						<td></td>
+				    </tr>
+				    <tr>
+				        <td>Allen Suner</td>
+						<td>Member (Fall, 13 ~ Spring,14)</td>
+				        <td>sune<span></span>ra@students.wwu.edu</td>
+				        <td></td>
+						<td></td>
+				    </tr>
+				    <tr>
+				        <td>Bu Lu</td>
+						<td>Member (Fall, 13 ~ Spring,14)</td>
+				        <td>lubu<span></span>32167@hotmail.com</td>
+				        <td></td>
+						<td></td>
+				    </tr>
+					<tr>
+				        <td>Calvin Chang</td>
+						<td>Member (Fall, 13 ~ Spring,14)</td>
+				        <td>chan<span></span>gc4@students.wwu.edu</td>
+				        <td></td>
+						<td></td>
+				    </tr>
+				</table>
+			</div>            
+
+			<div id="contact_us_form">
+				
+				<h1>Contact us</h1>
+				<form name="htmlform" method="post" action="ContactSend.php">
+				<table width="500px">
+				</tr>
+				<tr>
+				<td valign="top">
+				  <label for="first_name">First Name *</label>
+				 </td>
+				 <td valign="top">
+				  <input  type="text" name="first_name" maxlength="50" size="30">
+				 </td>
+				</tr>
+
+				<tr>
+				 <td valign="top"">
+				  <label for="last_name">Last Name *</label>
+				 </td>
+				 <td valign="top">
+				  <input  type="text" name="last_name" maxlength="50" size="30">
+				 </td>
+				</tr>
+				<tr>
+				 <td valign="top">
+				  <label for="email">Email Address *</label>
+				 </td>
+				 <td valign="top">
+				  <input  type="text" name="email" maxlength="80" size="30">
+				 </td>
+
+				</tr>
+				<tr>
+				 <td valign="top">
+				  <label for="telephone">Telephone Number</label>
+				 </td>
+				 <td valign="top">
+				  <input  type="text" name="telephone" maxlength="30" size="30">
+				 </td>
+				</tr>
+				<tr>
+				 <td valign="top">
+				  <label for="comments">Comments *</label>
+				 </td>
+				 <td valign="top">
+				  <textarea  name="comments" maxlength="1000" cols="25" rows="6"></textarea>
+				 </td>
+
+				</tr>
+				<tr>
+				 <td colspan="2" style="text-align:center">
+				 
+				  <input type="submit" value="Submit">   
+				 </td>
+				</tr>
+				</table>
+				</form>
+			</div>
+
+		</div>
+	</body>
+</html>
