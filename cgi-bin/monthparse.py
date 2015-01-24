@@ -22,6 +22,7 @@ class BuildingUtilData:
 	code = ""
 	utility = None
 	unit = None
+	data = None
 
 	def __init__(self, code, util):
 		self.code = code
@@ -58,6 +59,8 @@ class BuildingUtilData:
 			'Nov': None,
 			'Dec': None
 		}
+
+		self.data = [utilpre, utilcurr]
 
 
 #building a JSON string from the two letter building code
@@ -191,8 +194,8 @@ print("")
 form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
-code = "OM"
-util = "elec"
+code = "OM" #test value
+util = "elec" #test value
 building = BuildingUtilData(code, util)
 book = xlrd.open_workbook('file.xlsx')
 build(building, book, code, util)
