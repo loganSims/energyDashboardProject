@@ -28,36 +28,32 @@ class BuildingUtilData:
 		self.code = code
 		self.utility = util
 		utilpre = {
-			'type': self.utility,
-			'unit': self.unit,
-			'Jan': None,
-			'Feb': None,
-			'Mar': None,
-			'Apr': None,
-			'May': None,
-			'Jun': None,
-			'Jul': None,
-			'Aug': None,
-			'Sep': None,
-			'Oct': None,
-			'Nov': None,
-			'Dec': None
+			1 : None,
+			2 : None,
+			3 : None,
+			4 : None,
+			5 : None,
+			6 : None,
+			7 : None,
+			8 : None,
+			9 : None,
+			10 : None,
+			11 : None,
+			12 : None
 		}
 		utilcurr = {
-			'type': self.utility,
-			'unit': self.unit,
-			'Jan': None,
-			'Feb': None,
-			'Mar': None,
-			'Apr': None,
-			'May': None,
-			'Jun': None,
-			'Jul': None,
-			'Aug': None,
-			'Sep': None,
-			'Oct': None,
-			'Nov': None,
-			'Dec': None
+			1 : None,
+			2 : None,
+			3 : None,
+			4 : None,
+			5 : None,
+			6 : None,
+			7 : None,
+			8 : None,
+			9 : None,
+			10 : None,
+			11 : None,
+			12 : None
 		}
 
 		self.data = [utilpre, utilcurr]
@@ -66,7 +62,10 @@ class BuildingUtilData:
 #building a JSON string from the two letter building code
 def build(building, book, code, util):
 
-	months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec"]
+	#two different sets of month for diff excel sheets	
+	monthsStrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+	
 	#worksheets
 	if (util == 'elec'):
 		currElectric = book.sheet_by_name('FY2014 GEFdash Elec kWh')
@@ -109,30 +108,20 @@ def build(building, book, code, util):
 			header_row, building_col = findHeaderCol(sheet[sh], code)
 			building_row = findBuildingRow(sheet[sh], code, header_row, building_col)
 
-			mColumn = findUtilityColumn(sheet[sh], header_row)
-          
-         #last years sheet
-			if sh == 0:
-				#TODO GET MONTH NOT YEAR
-				for month in months:
-		      
-
-					
-					
-					prevM = getMeasurement(1, sheet, mColumn, building_row)
-					utility = building.utilities[utilCount]
-					utility['prevMeasurement'] = prevM
-
-
+         #last year's sheet
+			if sh == 1:
+				print("processing last years sheet\n")
+				for i in range(0, 11):
+					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
+					building.data[0][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
 		   #current years sheet
 			else:
+				print("processing current years sheet\n")
+				for i in range(0, 11):
+					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
+					building.data[1][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
 
-				#TODO GET MONTH NOT YEAR
-				currM = getMeasurement(0, sheet, mColumn, building_row)
-				utility = building.utilities[utilCount]
-				utility['currMeasurement'] = currM
-
-			building.name = getBuildingName(sheets[sh], building_row)
+			building.name = getBuildingName(sheet[sh], building_row)
 
 	except Exception as e:
 		pass
@@ -166,20 +155,40 @@ def findBuildingRow(sheet, code, header_row, building_col):
 
 	raise Exception("Building with code: " + code + " does not have data in this file.")
 
-#finds the utility column
-def findUtilityColumn(sheet, header_row):
+#finds the month column
+def findMonthColumn(sheet, header_row, monthNum, monthStr, datemode):
 	mCol = -1
 	num_cells = sheet.ncols - 1
 	while mCol < num_cells:
 		mCol += 1
 		value = sheet.cell_value(header_row, mCol)
-		if (str(value).startswith('GraphYTD')):
+		#filler value for x
+		x = [-1, -1]
+
+		#if sheet uses string dates
+		if (value == monthStr):
+			return mCol
+
+		#if sheet uses excel number dates
+		try:
+			x = xlrd.xldate_as_tuple(value, datemode)
+		except Exception as e:
+			pass
+
+		if (x[1] == monthNum):
 			return mCol
 
 #gets a utility measurement
-def getMeasurement(year, sheets, mColumn, building_row):
-	measurement = sheets[year].cell_value(building_row, mColumn)
-	return int(measurement)
+def getMeasurement(sheet, mColumn, building_row):
+
+	try:
+		measurement = sheet.cell_value(building_row, mColumn)
+		print("found data!")
+		return int(measurement)
+	except Exception as e:
+		pass
+	
+	return 0
 
 #gets the building name on a sheet given an specific row
 def getBuildingName(sheet, building_row):
@@ -188,7 +197,7 @@ def getBuildingName(sheet, building_row):
 	return name
 
 #main 
-cgitb.enable()
+#cgitb.enable()
 print("Content-Type: application/json")
 print("")
 form = cgi.FieldStorage()
