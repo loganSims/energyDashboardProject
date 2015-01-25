@@ -111,14 +111,16 @@ def build(building, book, code, util):
          #last year's sheet
 			if sh == 1:
 				print("processing last years sheet\n")
-				for i in range(0, 11):
+				for i in range(0, 12):
 					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
+					#set month data in utilpre of data to measurement
 					building.data[0][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
 		   #current years sheet
 			else:
 				print("processing current years sheet\n")
-				for i in range(0, 11):
+				for i in range(0, 12):
 					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
+					#set utilcur of data at month months[i] to measurement
 					building.data[1][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
 
 			building.name = getBuildingName(sheet[sh], building_row)
@@ -162,17 +164,18 @@ def findMonthColumn(sheet, header_row, monthNum, monthStr, datemode):
 	while mCol < num_cells:
 		mCol += 1
 		value = sheet.cell_value(header_row, mCol)
-		#filler value for x
-		x = [-1, -1]
 
 		#if sheet uses string dates
 		if (value == monthStr):
 			return mCol
 
 		#if sheet uses excel number dates
+		#look into xlrd.xldate_as_tuple for more info
 		try:
 			x = xlrd.xldate_as_tuple(value, datemode)
 		except Exception as e:
+			#filler value for x
+			x = [-1, -1]
 			pass
 
 		if (x[1] == monthNum):
@@ -181,9 +184,9 @@ def findMonthColumn(sheet, header_row, monthNum, monthStr, datemode):
 #gets a utility measurement
 def getMeasurement(sheet, mColumn, building_row):
 
+	#try block in case cell is empty
 	try:
 		measurement = sheet.cell_value(building_row, mColumn)
-		print("found data!")
 		return int(measurement)
 	except Exception as e:
 		pass
@@ -204,7 +207,7 @@ form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
 code = "OM" #test value
-util = "elec" #test value
+util = "water" #test value
 building = BuildingUtilData(code, util)
 book = xlrd.open_workbook('file.xlsx')
 build(building, book, code, util)
