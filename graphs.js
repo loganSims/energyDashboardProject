@@ -221,6 +221,9 @@ function makeGraph(json) {
 	chart = new dimple.chart(svg, data);
 	
 	// TODO: Change "color years" in 2020
+    // NEW TODO
+    // We can change these commands to do mod arith on the year, if its even assign the one color, if its odd assign the other
+    // I'm not sure where the dimple.chart.assignColor call is going...
 	chart.assignColor("2013", "#6C6C6C", "#6C6C6C", .75);
 	chart.assignColor("2014", "#005794", "#005794", .75);
 	chart.assignColor("2015", "#6C6C6C", "#6C6C6C", .75);
