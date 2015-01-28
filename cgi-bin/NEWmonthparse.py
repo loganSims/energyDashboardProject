@@ -68,7 +68,7 @@ def build(building, book, code, util):
 	if (util == 'elec'):
 		#name of worksheet
 		sheet = book.sheet_by_name('BldgEnergyCost')
-	
+		building.unit = 'kWh'	
 	#TODO find place to get year!!!! maybe URL?
 	preyear = 2013
 	curyear = 2014
@@ -76,8 +76,7 @@ def build(building, book, code, util):
 	building.currYear = curyear
 	building.prevYear = preyear
 
-	building_row = None
-	
+	building_row = None	
 
 	try:
 
