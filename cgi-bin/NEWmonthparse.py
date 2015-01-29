@@ -27,36 +27,20 @@ class BuildingUtilData:
 	def __init__(self, code, util):
 		self.code = code
 		self.utility = util
-		utilpre = {
-			1 : None,
-			2 : None,
-			3 : None,
-			4 : None,
-			5 : None,
-			6 : None,
-			7 : None,
-			8 : None,
-			9 : None,
-			10 : None,
-			11 : None,
-			12 : None
-		}
-		utilcurr = {
-			1 : None,
-			2 : None,
-			3 : None,
-			4 : None,
-			5 : None,
-			6 : None,
-			7 : None,
-			8 : None,
-			9 : None,
-			10 : None,
-			11 : None,
-			12 : None
-		}
 
-		self.data = [utilpre, utilcurr]
+		jan = { 'month' : 'jan', 'pre' : None, 'post' : None }
+		feb = { 'month' : 'feb', 'pre' : None, 'post' : None }
+		mar = { 'month' : 'mar', 'pre' : None, 'post' : None }
+		apr = { 'month' : 'apr', 'pre' : None, 'post' : None }
+		may = { 'month' : 'may', 'pre' : None, 'post' : None }
+		jun = { 'month' : 'jun', 'pre' : None, 'post' : None }
+		jul = { 'month' : 'jul', 'pre' : None, 'post' : None }
+		aug = { 'month' : 'aug', 'pre' : None, 'post' : None }
+		sep = { 'month' : 'sep', 'pre' : None, 'post' : None }
+		oct = { 'month' : 'oct', 'pre' : None, 'post' : None }
+		nov = { 'month' : 'nov', 'pre' : None, 'post' : None }
+		dec = { 'month' : 'dec', 'pre' : None, 'post' : None }
+		self.data = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
 
 
 #building a JSON string from the two letter building code
@@ -91,12 +75,12 @@ def build(building, book, code, util):
 				#gets month col for preyear
 				mColumn = findMonthColumn(sheet, months[i], book.datemode, preyear)
 				#set month data in utilpre of data to measurement
-				building.data[0][months[i]] = getMeasurement(sheet, mColumn, building_row)
+				building.data[i]['pre'] = getMeasurement(sheet, mColumn, building_row)
 
 				#gets month col for curyear
 				mColumn = findMonthColumn(sheet, months[i], book.datemode, curyear)
 				#set month data in utilcur of data to measurement
-				building.data[1][months[i]] = getMeasurement(sheet, mColumn, building_row)
+				building.data[i]['post'] = getMeasurement(sheet, mColumn, building_row)
 
 
 			building.name = getBuildingName(sheet[sh], building_row)
