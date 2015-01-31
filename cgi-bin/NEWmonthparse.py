@@ -9,6 +9,7 @@
 
 #imports
 import cgi, cgitb
+from glob import glob
 import xlrd
 import json
 from datetime import date
@@ -61,14 +62,16 @@ def build(building, code, util):
 
 	#get book and worksheet for util
 	if (util == 'elec'):
-		#name of worksheet
-		book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
+		#attempt to handle file name changes (go glob!)
+		bookname = glob('Energy*')[0]	
+		book = xlrd.open_workbook(bookname)
 		sheet = book.sheet_by_name('BldgEnergyCost')
 		building.unit = 'kWh'	
 
 	if (util == 'steam'):
-		#name of worksheet
-		book = xlrd.open_workbook('Gas-SteamCost-SteamPlant-FY12-current.xlsx')
+		#attempt to handle file name changes
+		bookname = glob('Gas*')[0]
+		book = xlrd.open_workbook(bookname)
 		sheet = book.sheet_by_name('PoundsSteamPerBldg')
 		building.unit = 'lbs'	
 
@@ -178,7 +181,7 @@ form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
 code = "OM" #test value
-util = 'steam' #test value
+util = 'elec' #test value
 
 building = BuildingUtilData(code, util)
 #book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
