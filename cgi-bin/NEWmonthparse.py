@@ -44,7 +44,7 @@ class BuildingUtilData:
 
 
 #building a JSON string from the two letter building code
-def build(building, book, code, util):
+def build(building, code, util):
 
 	months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
@@ -59,11 +59,23 @@ def build(building, book, code, util):
                        "MH": "MILLER HALL"
 			}
 
-	#worksheets
+	#get book and worksheet for util
 	if (util == 'elec'):
 		#name of worksheet
+		book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
 		sheet = book.sheet_by_name('BldgEnergyCost')
 		building.unit = 'kWh'	
+
+	if (util == 'steam'):
+		#name of worksheet
+		book = xlrd.open_workbook('Gas-SteamCost-SteamPlant-FY12-current.xlsx')
+		sheet = book.sheet_by_name('PoundsSteamPerBldg')
+		building.unit = 'lbs'	
+
+
+
+
+
 	#TODO find place to get year!!!! maybe URL?
 	preyear = 2013
 	curyear = 2014
@@ -166,10 +178,10 @@ form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
 code = "OM" #test value
-util = 'elec' #test value
+util = 'steam' #test value
 
 building = BuildingUtilData(code, util)
-book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
-build(building, book, code, util)
+#book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
+build(building, code, util)
 
 print(json.dumps(building.__dict__, indent = 4))
