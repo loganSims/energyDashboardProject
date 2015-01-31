@@ -47,7 +47,18 @@ class BuildingUtilData:
 def build(building, book, code, util):
 
 	months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
 	
+	BuildingNames = {
+                       "OM": "OLD MAIN" ,
+                       "BH": "BOND HALL",
+                       "AI": "ACADEMIC INSTRUCTION CTR",
+                       "CF": "COMMUNICATIONS",
+                       "BI": "BIOLOGY BUILDING",
+                       "AH": "ARNTZEN",
+                       "MH": "MILLER HALL"
+			}
+
 	#worksheets
 	if (util == 'elec'):
 		#name of worksheet
@@ -64,10 +75,11 @@ def build(building, book, code, util):
 
 	try:
 
-			#add function find building column?
+			#TODO add function find building column?
 
 			#gets building row
-			building_row = findBuildingRow(sheet, code)
+			buildingName = BuildingNames[code]
+			building_row = findBuildingRow(sheet, buildingName)
 
 			#print("processing sheet\n")
 			for i in range(0, 12):
@@ -153,7 +165,7 @@ print("")
 form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
-code = "OLD MAIN" #test value
+code = "OM" #test value
 util = 'elec' #test value
 
 building = BuildingUtilData(code, util)
