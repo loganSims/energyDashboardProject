@@ -32,7 +32,7 @@
 	</head>	
 		
 	<!-- body -->
-	<body>	
+	<body>
 		<div id="container">				
 			<div id="navigation">
 				<!-- navigation_header -->
@@ -42,23 +42,30 @@
 				</div>
 				<!--cssmenu -->				
 				<div id='cssmenu'>
-					<ul>
-				       	<li class='active'><a href='javascript:load_page("home.html");'><span>Home</span></a></li>
-				          <!-- BUILDING LIST -->
-                          <li class='has-sub'><a href='#'><span>Building List</span></a>
-				          	<ul id="building_list">                    		
-				            	<li><a href='javascript:drawGraph("BT");'><span>Buchanan Towers</span></a></li>
-				                <li><a href='javascript:drawGraph("OM");'><span>Old Main</span></a></li>
-				                <li><a href='javascript:drawGraph("BH");'><span>Bond Hall</span></a></li>
-				                <li><a href='javascript:drawGraph("AI");'><span>Academic Instructional Center</span></a></li>
-				                <li><a href='javascript:drawGraph("BH");'><span>Bond Hall</span></a></li>							
-				                <li><a href='javascript:drawGraph("CF");'><span>Communications Facility</span></a></li>
-				                <li><a href='javascript:drawGraph("BI");'><span>Biology</span></a></li>
-				                <li><a href='javascript:drawGraph("AH");'><span>Arntzen Hall</span></a></li>
-				                <li class='last'><a href='javascript:drawGraph("MH");'><span>Miller Hall</span></a></li>
-							</ul>
-						</li>
-						<li class='last'><a href='javascript:load_page("contact.html");'><span>Contact us</span></a></li>
+				  <ul>
+				    <li class='active'><a href='javascript:load_page("home.html");'><span>Home</span></a></li>
+				    <!-- BUILDING LIST -->
+				    <li class='has-sub'><a href='#'><span>Building List</span></a>
+				      <ul id="building_list">                    		
+				        <li><a href='javascript:drawGraph("BT");'><span>Buchanan Towers</span></a></li>
+				        <li class='has-sub'><a href='#'>Old Main</a>
+					  <ul id="old_main">
+					    <li><a href='javascript:drawGraph("OM");'>Old Main Electric</a></li>
+					    <li><a href='javascript:drawGraph("OM");'>Old Main Water</a></li>
+					    <li><a href='javascript:drawGraph("OM");'>Old Main Steam</a></li>
+					    <li><a href='javascript:drawGraph("OM");'>Old Main Garbage</a></li>
+					  </ul>
+					</li>
+					<li><a href='javascript:drawGraph("BH");'><span>Bond Hall</span></a></li>
+				        <li><a href='javascript:drawGraph("AI");'><span>Academic Instructional Center</span></a></li>
+				        <li><a href='javascript:drawGraph("BH");'><span>Bond Hall</span></a></li>				
+				        <li><a href='javascript:drawGraph("CF");'><span>Communications Facility</span></a></li>
+				        <li><a href='javascript:drawGraph("BI");'><span>Biology</span></a></li>
+				        <li><a href='javascript:drawGraph("AH");'><span>Arntzen Hall</span></a></li>
+				        <li class='last'><a href='javascript:drawGraph("MH");'><span>Miller Hall</span></a></li>
+				      </ul>
+				    </li>
+				    <li class='last'><a href='javascript:load_page("contact.html");'><span>Contact us</span></a></li>
 				        <li class='has-sub'><a href='#'><span>External Links</span></a>
 							<ul>
 								<li>
