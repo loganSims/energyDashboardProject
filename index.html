@@ -1,159 +1,161 @@
 <!-- html -->
-<!-- <html overflow-y="scroll"> -->
 <html>
-  <!-- head -->
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">	
-    <title>Green Energy Fee</title>
-    <link rel="stylesheet" type="text/css" href="IndexStyle.css">	
-    <link rel="stylesheet" type="text/css" href="MenuStyle.css">	
-    <!-- Requests for d3 and dimple libraries -->
-    <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
-    <!-- jQuery (for JSON parsing and AJAX) -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Request for local graphing js -->
-    <script src="buildings.js"></script>
-    <script src="graphs.js"></script>		
-    <!-- Request for local manu_jquery js -->
-    <script type='text/javascript' src='menu_jquery.js'></script>
-    <!-- Javascript to load pages -->	
-    <script language="JavaScript">	
-      function load_page(page)
-      { 			
-      $("#content").load(page);			
-      }	
-      
-      $( document ).ready(function(){ 
-      load_page('home.html');
-      });
-    </script>					
-  </head>	
-  
-  <!-- body -->
-  <body>
-    <div id="container">				
-      <div id="navigation">
-	<!-- navigation_header -->
-	<div id="navigation_header">
-	  <!-- logo -->					
-	  <img src="logo.png" width=100% ALT="Starflower">							
-	</div>
-	<!--cssmenu -->				
-	<div id='cssmenu'>
-	  <ul>
-	    <li class='active'><a href='javascript:load_page("home.html");'><span>Home</span></a></li>
-	    <!-- BUILDING LIST -->
-	    <li class='has-sub'><a href='#'><span>Building List</span></a>
-	      <ul id="building_list">
-		<li class='has-sub'><a href='#'>Buchanan Towers</a>
-		  <ul id="buchanan_towers">
-		    <li><a href='javascript:drawGraph("BT");'>Buchanan Towers Electric</a></li>
-		    <li><a href='javascript:drawGraph("BT");'>Buchanan Towers Water</a></li>
-		    <li><a href='javascript:drawGraph("BT");'>Buchanan Towers Steam</a></li>
-		    <li><a href='javascript:drawGraph("BT");'>Buchanan Towers Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Old Main</a>
-		  <ul id="old_main">
-		    <li><a href='javascript:drawGraph("OM");'>Old Main Electric</a></li>
-		    <li><a href='javascript:drawGraph("OM");'>Old Main Water</a></li>
-		    <li><a href='javascript:drawGraph("OM");'>Old Main Steam</a></li>
-		    <li><a href='javascript:drawGraph("OM");'>Old Main Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Bond Hall</a>
-		  <ul id="bond_hall">
-		    <li><a href='javascript:drawGraph("BH");'>Bond Hall Electric</a></li>
-		    <li><a href='javascript:drawGraph("BH");'>Bond Hall Water</a></li>
-		    <li><a href='javascript:drawGraph("BH");'>Bond Hall Steam</a></li>
-		    <li><a href='javascript:drawGraph("BH");'>Bond Hall Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Academic Instructional Center</a>
-		  <ul id="academic_instructional_center">
-		    <li><a href='javascript:drawGraph("AI");'>Academic Instructional Center Electric</a></li>
-		    <li><a href='javascript:drawGraph("AI");'>Academic Instructional Center Water</a></li>
-		    <li><a href='javascript:drawGraph("AI");'>Academic Instructional Center Steam</a></li>
-		    <li><a href='javascript:drawGraph("AI");'>Academic Instructional Center Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Communications Facility</a>
-		  <ul id="communications_facility">
-		    <li><a href='javascript:drawGraph("CF");'>Communications Facility Electric</a></li>
-		    <li><a href='javascript:drawGraph("CF");'>Communications Facility Water</a></li>
-		    <li><a href='javascript:drawGraph("CF");'>Communications Facility Steam</a></li>
-		    <li><a href='javascript:drawGraph("CF");'>Communications Facility Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Biology</a>
-		  <ul id="biology">
-		    <li><a href='javascript:drawGraph("BI");'>Biology Electric</a></li>
-		    <li><a href='javascript:drawGraph("BI");'>Biology Water</a></li>
-		    <li><a href='javascript:drawGraph("BI");'>Biology Steam</a></li>
-		    <li><a href='javascript:drawGraph("BI");'>Biology Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Arntzen Hall</a>
-		  <ul id="arntzen_hall">
-		    <li><a href='javascript:drawGraph("AH");'>Arntzen Hall Electric</a></li>
-		    <li><a href='javascript:drawGraph("AH");'>Arntzen Hall Water</a></li>
-		    <li><a href='javascript:drawGraph("AH");'>Arntzen Hall Steam</a></li>
-		    <li><a href='javascript:drawGraph("AH");'>Arntzen Hall Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Miller Hall</a>
-		  <ul id="miller_hall">
-		    <li><a href='javascript:drawGraph("MH");'>Miller Hall Electric</a></li>
-		    <li><a href='javascript:drawGraph("MH");'>Miller Hall Water</a></li>
-		    <li><a href='javascript:drawGraph("MH");'>Miller Hall Steam</a></li>
-		    <li><a href='javascript:drawGraph("MH");'>Miller Hall Garbage</a></li>
-		  </ul>
-		</li>
+
+	<!-- head -->
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">	
+		<title>Green Energy Fee</title>
+		<link rel="stylesheet" type="text/css" href="IndexStyle.css">	
+		<link rel="stylesheet" type="text/css" href="MenuStyle.css">	
+		<!-- Requests for d3 and dimple libraries -->
+		<script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+		<script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+		<!-- jQuery (for JSON parsing and AJAX) -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Request for local graphing js -->
+		<script src="buildings.js"></script>
+		<script src="graphs.js"></script>		
+		<!-- Request for local manu_jquery js -->
+		<script type='text/javascript' src='menu_jquery.js'></script>
+		<!-- Javascript to load pages -->	
+		<script language="JavaScript">	
+			function load_page(page)
+			{ 			
+				$("#content").load(page);			
+			}	
+
+			$( document ).ready(function(){ 
+				load_page('home.html');
+			});
+		</script>					
+	</head>	
 		
-	      </ul>
-	    </li>
-	    <li class='last'><a href='javascript:load_page("contact.html");'><span>Contact us</span></a></li>
-	    <li class='has-sub'><a href='#'><span>External Links</span></a>
-	      <ul>
-		<li>
-		  <a href='http://www.wwu.edu/' target='_blank'>
-		    <span>Western Washington University</span>
-		  </a>
-		</li>
-		<li>
-		  <a href='http://www.wwu.edu/sustain/programs/gef/' target='_blank'>
-		    <span>Western Sustainability</span>
-		  </a>
-		</li>
-		<li class='last'>
-		  <a href='https://cst.wwu.edu/computer-science' target='_blank'>
-		    <span>Western Washington University Computer Science Department</span>
-		  </a>
-		</li>
-	      </ul>
-	    </li>
-	  </ul>
-	</div>
-	<!-- navigation_footer 
-	     <div id="navigation_footer">
-	       <h3>navigation_footer</h3>
-	     </div>-->
-      </div>
-      <div id="content">		
-	<div id="chartContainer">					
-	  <div id="chart">
-	    <h1 id="buildingName" align="center"></h1>
-	  </div>
-	</div>								
-	<!-- content_footer -->
-	<!--
-	    <div id="content_footer">
-	      <h3>content_footer<h3>					
-	    </div>		
-	    -->
-      </div>				
-    </div>
-  </body>
+	<!-- body -->
+	<body>
+		<div id="container">				
+			<div id="navigation">
+				<!-- navigation_header -->
+				<div id="navigation_header">
+					<!-- logo -->					
+					<img src="logo.png" width=100% ALT="Starflower">							
+				</div>
+				<!--cssmenu -->				
+				<div id='cssmenu'>
+				  <ul>
+				    <li class='active'><a href='javascript:load_page("home.html");'><span>Home</span></a></li>
+				    <!-- BUILDING LIST -->
+				    <li class='has-sub'><a href='#'><span>Building List</span></a>
+				      <ul id="building_list">
+				        <li class='has-sub'><a href='#'>Buchanan Towers</a>
+					  <ul id="buchanan_towers">
+					    <li><a href='javascript:drawGraph("BT","elec");'>Buchanan Towers Electric</a></li>
+					    <li><a href='javascript:drawGraph("BT","water");'>Buchanan Towers Water</a></li>
+					    <li><a href='javascript:drawGraph("BT","steam");'>Buchanan Towers Steam</a></li>
+					    <li><a href='javascript:drawGraph("BT","garbage");'>Buchanan Towers Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Old Main</a>
+					  <ul id="old_main">
+					    <li><a href='javascript:drawGraph("OM","elec");'>Old Main Electric</a></li>
+					    <li><a href='javascript:drawGraph("OM","water");'>Old Main Water</a></li>
+					    <li><a href='javascript:drawGraph("OM","steam");'>Old Main Steam</a></li>
+					    <li><a href='javascript:drawGraph("OM","garbage");'>Old Main Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Bond Hall</a>
+					  <ul id="bond_hall">
+					    <li><a href='javascript:drawGraph("BH","elec");'>Bond Hall Electric</a></li>
+					    <li><a href='javascript:drawGraph("BH","water");'>Bond Hall Water</a></li>
+					    <li><a href='javascript:drawGraph("BH","steam");'>Bond Hall Steam</a></li>
+					    <li><a href='javascript:drawGraph("BH","garbage");'>Bond Hall Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Academic Instructional Center</a>
+					  <ul id="academic_instructional_center">
+					    <li><a href='javascript:drawGraph("AI","elec");'>Academic Instructional Center Electric</a></li>
+					    <li><a href='javascript:drawGraph("AI","water");'>Academic Instructional Center Water</a></li>
+					    <li><a href='javascript:drawGraph("AI","steam");'>Academic Instructional Center Steam</a></li>
+					    <li><a href='javascript:drawGraph("AI","garbage");'>Academic Instructional Center Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Communications Facility</a>
+					  <ul id="communications_facility">
+					    <li><a href='javascript:drawGraph("CF","elec");'>Communications Facility Electric</a></li>
+					    <li><a href='javascript:drawGraph("CF","water");'>Communications Facility Water</a></li>
+					    <li><a href='javascript:drawGraph("CF","steam");'>Communications Facility Steam</a></li>
+					    <li><a href='javascript:drawGraph("CF","garbage");'>Communications Facility Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Biology</a>
+					  <ul id="biology">
+					    <li><a href='javascript:drawGraph("BI","elec");'>Biology Electric</a></li>
+					    <li><a href='javascript:drawGraph("BI","water");'>Biology Water</a></li>
+					    <li><a href='javascript:drawGraph("BI","steam");'>Biology Steam</a></li>
+					    <li><a href='javascript:drawGraph("BI","garbage");'>Biology Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Arntzen Hall</a>
+					  <ul id="arntzen_hall">
+					    <li><a href='javascript:drawGraph("AH","elec");'>Arntzen Hall Electric</a></li>
+					    <li><a href='javascript:drawGraph("AH","water");'>Arntzen Hall Water</a></li>
+					    <li><a href='javascript:drawGraph("AH","steam");'>Arntzen Hall Steam</a></li>
+					    <li><a href='javascript:drawGraph("AH","garbage");'>Arntzen Hall Garbage</a></li>
+					  </ul>
+					</li>
+					<li class='has-sub'><a href='#'>Miller Hall</a>
+					  <ul id="miller_hall">
+					    <li><a href='javascript:drawGraph("MH","elec");'>Miller Hall Electric</a></li>
+					    <li><a href='javascript:drawGraph("MH","water");'>Miller Hall Water</a></li>
+					    <li><a href='javascript:drawGraph("MH","steam");'>Miller Hall Steam</a></li>
+					    <li><a href='javascript:drawGraph("MH","garbage");'>Miller Hall Garbage</a></li>
+					  </ul>
+					</li>
+					
+				      </ul>
+				    </li>
+				    <li class='last'><a href='javascript:load_page("contact.html");'><span>Contact us</span></a></li>
+				        <li class='has-sub'><a href='#'><span>External Links</span></a>
+							<ul>
+								<li>
+		  							<a href='http://www.wwu.edu/' target='_blank'>
+		   								<span>Western Washington University</span>
+									</a>
+		   						</li>
+								<li>
+		  							<a href='http://www.wwu.edu/sustain/programs/gef/' target='_blank'>
+		   								<span>Western Sustainability</span>
+									</a>
+		   						</li>
+								<li class='last'>
+									<a href='https://cst.wwu.edu/computer-science' target='_blank'>
+										<span>Western Washington University Computer Science Department</span>
+									</a>
+								</li>
+		 					</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- navigation_footer 
+				<div id="navigation_footer">
+					<h3>navigation_footer</h3>
+				</div>-->
+			</div>
+			<div id="content">		
+				<div id="chartContainer">					
+					<div id="chart">
+						<h1 id="buildingName" align="center"></h1>
+					</div>
+				</div>								
+				<!-- content_footer -->
+				<!--
+				<div id="content_footer">
+					<h3>content_footer<h3>					
+				</div>		
+				-->
+			</div>				
+		</div>
+	</body>
 </html>
+
+
