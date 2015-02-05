@@ -46,71 +46,72 @@ function fillBuildingTitle(buildingCode) {
 
 // Given a building code ("OM"), get the JSON representation of waste, etc.
 function getBuildingJSON(buildingCode, debug) {
-  
-	console.log("getBuildingJSON called with " + buildingCode);
-	
-	if (buildingCode == "" || buildingCode == null) return;
+    
+    console.log("getBuildingJSON called with " + buildingCode);
+    
+    if (buildingCode == "" || buildingCode == null) return;
 
-	//requestAddress = "http://" + window.location.host +  "/lookup?code=" + buildingCode;
-        requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/excelparse.py?code=" + buildingCode;
+    //requestAddress = "http://" + window.location.host +  "/lookup?code=" + buildingCode;
+    requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/excelparse.py?code=" + buildingCode;
 
     console.log(requestAddress);
+    //if(debug){
     if (debug && window.location.host != '140.160.141.163') {
-    var debugJSON = {
-       "code":"AI",
-       "name":"ACADEMIC INSTRUCTION CTR",
-       "currCo2":17639,
-       "prevCo2":44707,
-       "utilities":[
-          {
-             "currMeasurement":1339480,
-             "type":"electric",
-             "prevMeasurement":1653182,
-             "unit":"kWh"
-          },
-          {
-             "currMeasurement":9222909,
-             "type":"steam",
-             "prevMeasurement":8299788,
-             "unit":"thm"
-          },
-          {
-             "currMeasurement":300,
-             "type":"water",
-             "prevMeasurement":215,
-             "unit":"CCF"
-          },
-          {
-             "currMeasurement":null,
-             "type":"refuse",
-             "prevMeasurement":null,
-             "unit":"yds"
-          }
-       ],
-       "prevYear":2013,
-       "currYear":2014,
-       "co2unit":"lbs"
-    };
-    data = transformJsonToGraphData(debugJSON);
-    normalizedData = normalizeGraphData(data);
-    makeGraph(normalizedData);
-    
-    normalizedPiData = transformJsonToPieChartData(debugJSON);
-    makePieChart(normalizedPiData);
-    return;
+	var debugJSON = {
+	    "code":"AI",
+	    "name":"ACADEMIC INSTRUCTION CTR",
+	    "currCo2":17639,
+	    "prevCo2":44707,
+	    "utilities":[
+		{
+		    "currMeasurement":1339480,
+		    "type":"electric",
+		    "prevMeasurement":1653182,
+		    "unit":"kWh"
+		},
+		{
+		    "currMeasurement":7222909,
+		    "type":"steam",
+		    "prevMeasurement":8299788,
+		    "unit":"thm"
+		},
+		{
+		    "currMeasurement":150,
+		    "type":"water",
+		    "prevMeasurement":215,
+		    "unit":"CCF"
+		},
+		{
+		    "currMeasurement":null,
+		    "type":"refuse",
+		    "prevMeasurement":null,
+		    "unit":"yds"
+		}
+	    ],
+	    "prevYear":2013,
+	    "currYear":2014,
+	    "co2unit":"lbs"
+	};
+	data = transformJsonToGraphData(debugJSON);
+	normalizedData = normalizeGraphData(data);
+	makeGraph(normalizedData);
+	
+	normalizedPiData = transformJsonToPieChartData(debugJSON);
+	makePieChart(normalizedPiData);
+	return;
     }
 
-        
-	$.getJSON(requestAddress , function (response) { 
-		console.log("AJAX respone recieved");
-		jsonData = transformJsonToGraphData(response);
-		jsonData = normalizeGraphData(jsonData);
+    
+    $.getJSON(requestAddress , function (response) { 
+	console.log("AJAX respone recieved");
+	jsonData = transformJsonToGraphData(response);
+	jsonData = normalizeGraphData(jsonData);
 
-		makeGraph(jsonData);     
+	makeGraph(jsonData);     
         
         normalizedPiData = transformJsonToPieChartData(jsonData);
         makePieChart(normalizedPiData);
-	});
+    });
 }
 
 // Normalize the graph data so that 2013 data shows 100% and 2014 is a percentage of
@@ -279,7 +280,7 @@ function drawGraph(buildingCode) {
 	svg = dimple.newSvg("#chart", "100%", "100%");
 	
 	// Request JSON building data
-	json = getBuildingJSON(buildingCode, false);
+	json = getBuildingJSON(buildingCode, true);
 	
 	fillBuildingTitle(buildingCode);
     changeBackground(buildingCode);
