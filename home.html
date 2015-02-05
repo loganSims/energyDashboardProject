@@ -1,68 +1,68 @@
 <!-- html -->
 <html>
-	<!-- head -->
-	<head>				
-		<link rel="stylesheet" type="text/css" href="IndexStyle.css">	
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-		<script language="JavaScript">
-			
-			var interval;
-			
-			if (interval != null) {
-				clearInterval(interval);
-			}
+  <!-- head -->
+  <head>				
+    <link rel="stylesheet" type="text/css" href="IndexStyle.css">	
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script language="JavaScript">
+      
+      var interval;
+      
+      if (interval != null) {
+      clearInterval(interval);
+      }
 
-			$("#slideshow > div:gt(0)").hide();
-				interval = setInterval(function() { 
-				  $('#slideshow > div:first')
-					.fadeOut(1000)
-					.next()
-					.fadeIn(1000)
-					.end()
-					.appendTo('#slideshow');
-				},  3000);
+      $("#slideshow > div:gt(0)").hide();
+      interval = setInterval(function() { 
+      $('#slideshow > div:first')
+      .fadeOut(1000)
+      .next()
+      .fadeIn(1000)
+      .end()
+      .appendTo('#slideshow');
+      },  3000);
 
-		</script>		
+    </script>		
 
-	</head>	
-		
-	<!-- body -->
-	<body>	
-		<div id="home_content">	
-			<div id="intro">
-				
-				<table style="width:80%">
-					<tr>
-						<td><img width="100%" height="100%" src="wwuLogo.png"></td>
-						<td>
-							<h1>Welcome to GEF</h1>
-							<p>
-							This website is a joint collaboration between the Western Washington University Computer Science department and Green Energy Fee 
-							Initiative.
-							</p>
-							<p>
-							By expanding the building list on the left and selecting a building, it is easy to see the year-over-year 
-							changes in usage of utilities. For more information, check out the external links.
-							</p>
-						</td>
-					</tr>				  	
-				</table>
-			</div>	
-		
-			<div id="slideshow">
-				<div>
-					<img src="http://manoa.hawaii.edu/testurop/sites/default/files/images/rops/wwu.jpeg">
-				</div>
-			   	<div>
-				 	<img src="http://bbjtoday.com/wp-content/woo_custom/1806-WWU.jpg">
-			   	</div>	
-				<div>
-					<img src="http://colleges.usnews.rankingsandreviews.com/img/college-photo_632..jpg">
-			   	</div>			   
-			</div>
+  </head>	
+  
+  <!-- body -->
+  <body>	
+    <div id="home_content">	
+      <div id="intro">
+	
+	<table style="width:80%">
+	  <tr>
+	    <td><img width="100%" height="100%" src="wwuLogo.png"></td>
+	    <td>
+	      <h1>Welcome to GEF</h1>
+	      <p>
+		This website is a joint collaboration between the Western Washington University Computer Science department and Green Energy Fee 
+		Initiative.
+	      </p>
+	      <p>
+		By expanding the building list on the left and selecting a building, it is easy to see the year-over-year 
+		changes in usage of utilities. For more information, check out the external links.
+	      </p>
+	    </td>
+	  </tr>				  	
+	</table>
+      </div>	
+      
+      <div id="slideshow">
+	<div>
+	  <img src="http://manoa.hawaii.edu/testurop/sites/default/files/images/rops/wwu.jpeg">
+	</div>
+	<div>
+	  <img src="http://bbjtoday.com/wp-content/woo_custom/1806-WWU.jpg">
+	</div>	
+	<div>
+	  <img src="http://colleges.usnews.rankingsandreviews.com/img/college-photo_632..jpg">
+	</div>			   
+      </div>
 
-		</div>
-	</body>
+    </div>
+  </body>
 </html>
 
 
