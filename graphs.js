@@ -96,8 +96,8 @@ function getBuildingJSON(buildingCode, debug) {
 	normalizedData = normalizeGraphData(data);
 	makeGraph(normalizedData);
 	
-	normalizedPiData = transformJsonToPieChartData(debugJSON);
-	makePieChart(normalizedPiData);
+	//normalizedPiData = transformJsonToPieChartData(debugJSON);
+	//makePieChart(normalizedPiData);
 	return;
     }
 
