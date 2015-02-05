@@ -9,6 +9,7 @@
 
 #imports
 import cgi, cgitb
+from glob import glob
 import xlrd
 import json
 from datetime import date
@@ -27,101 +28,87 @@ class BuildingUtilData:
 	def __init__(self, code, util):
 		self.code = code
 		self.utility = util
-		utilpre = {
-			1 : None,
-			2 : None,
-			3 : None,
-			4 : None,
-			5 : None,
-			6 : None,
-			7 : None,
-			8 : None,
-			9 : None,
-			10 : None,
-			11 : None,
-			12 : None
-		}
-		utilcurr = {
-			1 : None,
-			2 : None,
-			3 : None,
-			4 : None,
-			5 : None,
-			6 : None,
-			7 : None,
-			8 : None,
-			9 : None,
-			10 : None,
-			11 : None,
-			12 : None
-		}
 
-		self.data = [utilpre, utilcurr]
+		jan = { 'month' : 'jan', 'pre' : None, 'post' : None }
+		feb = { 'month' : 'feb', 'pre' : None, 'post' : None }
+		mar = { 'month' : 'mar', 'pre' : None, 'post' : None }
+		apr = { 'month' : 'apr', 'pre' : None, 'post' : None }
+		may = { 'month' : 'may', 'pre' : None, 'post' : None }
+		jun = { 'month' : 'jun', 'pre' : None, 'post' : None }
+		jul = { 'month' : 'jul', 'pre' : None, 'post' : None }
+		aug = { 'month' : 'aug', 'pre' : None, 'post' : None }
+		sep = { 'month' : 'sep', 'pre' : None, 'post' : None }
+		oct = { 'month' : 'oct', 'pre' : None, 'post' : None }
+		nov = { 'month' : 'nov', 'pre' : None, 'post' : None }
+		dec = { 'month' : 'dec', 'pre' : None, 'post' : None }
+		self.data = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
 
 
 #building a JSON string from the two letter building code
-def build(building, book, code, util):
+def build(building, code, util):
 
-	#two different sets of month for diff excel sheets	
-	monthsStrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 	months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
 	
-	#worksheets
+	BuildingNames = {
+                       "OM": "OLD MAIN" ,
+                       "BH": "BOND HALL",
+                       "AI": "ACADEMIC INSTRUCTION CTR",
+                       "CF": "COMMUNICATIONS",
+                       "BI": "BIOLOGY BUILDING",
+                       "AH": "ARNTZEN",
+                       "MH": "MILLER HALL"
+			}
+
+	#get book and worksheet for util
 	if (util == 'elec'):
-		currElectric = book.sheet_by_name('FY2014 GEFdash Elec kWh')
-		prevElectric = book.sheet_by_name('FY2013 GEFdash Elec kWh')
-		sheet = {
-			0: currElectric,
-			1: prevElectric
-		}
-	elif (util == 'steam'):
-		currSteam = book.sheet_by_name('FY2014 GEFdash Steam THERMS')
-		prevSteam = book.sheet_by_name('FY2013 GEFdash Steam THERMS')
-		sheet = {
-			0: currSteam, 
-			1: prevSteam
-		}
-	elif (util == 'water'):
-		currWater = book.sheet_by_name('FY2014 GEFdash Water CCF')
-		prevWater = book.sheet_by_name('FY2013 GEFdash Water CCF')
-		sheet = {
-			0: currWater, 
-			1: prevWater
-		}
-	elif (util == 'refu'):
-		currRefuse = book.sheet_by_name('FY2014 GEFdash Refuse Yds')
-		prevRefuse = book.sheet_by_name('FY2013 GEFdash Refuse Yds')
-		sheet = {
-			0: currRefuse, 
-			1: prevRefuse
-		}
-	
+		#attempt to handle file name changes (go glob!)
+		bookname = glob('Energy*')[0]	
+		book = xlrd.open_workbook(bookname)
+		sheet = book.sheet_by_name('BldgEnergyCost')
+		building.unit = 'kWh'	
 
-   #TODO get year from sheet?
-	building.currYear = date.today().year
-	building.prevYear = building.currYear - 1
+	if (util == 'steam'):
+		#attempt to handle file name changes
+		bookname = glob('Gas*')[0]
+		book = xlrd.open_workbook(bookname)
+		sheet = book.sheet_by_name('PoundsSteamPerBldg')
+		building.unit = 'lbs'	
 
-	building_row = None
+
+
+
+
+	#TODO find place to get year!!!! maybe URL?
+	preyear = 2013
+	curyear = 2014
+
+	building.currYear = curyear
+	building.prevYear = preyear
+
+	building_row = None	
+
 	try:
-		for sh in sheet:
-			#find the header
-			header_row, building_col = findHeaderCol(sheet[sh], code)
-			building_row = findBuildingRow(sheet[sh], code, header_row, building_col)
 
-         #last year's sheet
-			if sh == 1:
-				print("processing last years sheet\n")
-				for i in range(0, 12):
-					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
-					#set month data in utilpre of data to measurement
-					building.data[0][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
-		   #current years sheet
-			else:
-				print("processing current years sheet\n")
-				for i in range(0, 12):
-					mColumn = findMonthColumn(sheet[sh], header_row, months[i], monthsStrs[i], book.datemode)
-					#set utilcur of data at month months[i] to measurement
-					building.data[1][months[i]] = getMeasurement(sheet[sh], mColumn, building_row)
+			#TODO add function find building column?
+
+			#gets building row
+			buildingName = BuildingNames[code]
+			building_row = findBuildingRow(sheet, buildingName)
+
+			#print("processing sheet\n")
+			for i in range(0, 12):
+
+				#gets month col for preyear
+				mColumn = findMonthColumn(sheet, months[i], book.datemode, preyear)
+				#set month data in utilpre of data to measurement
+				building.data[i]['pre'] = getMeasurement(sheet, mColumn, building_row)
+
+				#gets month col for curyear
+				mColumn = findMonthColumn(sheet, months[i], book.datemode, curyear)
+				#set month data in utilcur of data to measurement
+				building.data[i]['post'] = getMeasurement(sheet, mColumn, building_row)
+
 
 			building.name = getBuildingName(sheet[sh], building_row)
 
@@ -129,56 +116,43 @@ def build(building, book, code, util):
 		pass
 
 
-#finds the header row
-def findHeaderCol(sheet, code):
-	num_rows = sheet.nrows - 1
-	num_cells = sheet.ncols - 1
-	header_row = -1
-	while header_row < num_rows:
-		header_row += 1
-		header_cell = -1
-		while header_cell < num_cells:
-			header_cell += 1
-			value = sheet.cell_value(header_row, header_cell)
-			value = ' '.join(str(value).split())
-			if (value == 'BLDG ID' or value == 'Loc ID'):
-				return header_row, header_cell
 
 #finds the building row
-def findBuildingRow(sheet, code, header_row, building_col):
-	#iterate down the BLDG ID Column
-	building_row = header_row
+def findBuildingRow(sheet, code):
+	#iterate down the building Column
+	building_row = 1
 	num_rows = sheet.nrows - 1
 	while building_row < num_rows:
 		building_row += 1
-		building_value = sheet.cell_value(building_row, building_col)
-		if (building_value == code):
+		#building col is located at column 2(C in excel)
+		building_value = sheet.cell_value(building_row, 2)
+		if (str(building_value).startswith(code)):
+			print("got buidling_value: " + building_value + "\n")
 			return building_row
 
+	#TODO note: This is not hit if code isnt in file!!!
 	raise Exception("Building with code: " + code + " does not have data in this file.")
 
 #finds the month column
-def findMonthColumn(sheet, header_row, monthNum, monthStr, datemode):
+def findMonthColumn(sheet, monthNum, datemode, year):
 	mCol = -1
 	num_cells = sheet.ncols - 1
 	while mCol < num_cells:
 		mCol += 1
-		value = sheet.cell_value(header_row, mCol)
+		value = sheet.cell_value(1, mCol)
 
-		#if sheet uses string dates
-		if (value == monthStr):
-			return mCol
-
-		#if sheet uses excel number dates
+		#sheet uses excel number dates
 		#look into xlrd.xldate_as_tuple for more info
+		#date[0] holds year, date[1] holds month
 		try:
-			x = xlrd.xldate_as_tuple(value, datemode)
-		except Exception as e:
+			date = xlrd.xldate_as_tuple(value, datemode)
+		except Exception as e: 
+			#thrown if sheet does not use excel dates
 			#filler value for x
-			x = [-1, -1]
+			date = [-1, -1]
 			pass
 
-		if (x[1] == monthNum):
+		if (date[1] == monthNum and date[0] == year):
 			return mCol
 
 #gets a utility measurement
@@ -207,9 +181,10 @@ form = cgi.FieldStorage()
 code = form.getvalue("code")
 util = form.getvalue("util")
 code = "OM" #test value
-util = "water" #test value
+util = 'elec' #test value
+
 building = BuildingUtilData(code, util)
-book = xlrd.open_workbook('file.xlsx')
-build(building, book, code, util)
+#book = xlrd.open_workbook('EnergyCost-MainSub-FY12-current.XLS')
+build(building, code, util)
 
 print(json.dumps(building.__dict__, indent = 4))
