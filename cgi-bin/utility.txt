@@ -1,0 +1,6 @@
+utility = {
+    "elec":"Electricity",
+    "steam":"Steam",
+    "water":"Water",
+    "garbage":"Garbage"
+}
