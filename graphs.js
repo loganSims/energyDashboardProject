@@ -55,47 +55,88 @@ function getBuildingJSON(buildingCode, debug) {
     requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/excelparse.py?code=" + buildingCode;
 
     console.log(requestAddress);
-    //if(debug){
-    if (debug && window.location.host != '140.160.141.163') {
+
+   if (debug && window.location.host != '140.160.141.163') {
 	var debugJSON = {
-	    "code":"AI",
-	    "name":"ACADEMIC INSTRUCTION CTR",
-	    "currCo2":17639,
-	    "prevCo2":44707,
-	    "utilities":[
-		{
-		    "currMeasurement":1339480,
-		    "type":"electric",
-		    "prevMeasurement":1653182,
-		    "unit":"kWh"
-		},
-		{
-		    "currMeasurement":7222909,
-		    "type":"steam",
-		    "prevMeasurement":8299788,
-		    "unit":"thm"
-		},
-		{
-		    "currMeasurement":150,
-		    "type":"water",
-		    "prevMeasurement":215,
-		    "unit":"CCF"
-		},
-		{
-		    "currMeasurement":null,
-		    "type":"refuse",
-		    "prevMeasurement":null,
-		    "unit":"yds"
-		}
-	    ],
-	    "prevYear":2013,
-	    "currYear":2014,
-	    "co2unit":"lbs"
-	};
+       "name":"ACADEMIC INSTRUCTION CTR",
+       "code":"AI",
+       "utility":"elec",
+       "unit":"kWh",
+       "data":"not Sure",
+
+       //"currCo2":17639,
+       //"prevCo2":44707,
+       "months":[
+          {
+             "month":"jan",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"feb",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"mar",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"apr",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"may",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"jun",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"jul",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"aug",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"sep",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"oct",
+             "pre":1653789,
+             "post":1653182,
+          },
+          {
+             "month":"nov",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "month":"dec",
+             "pre":1653789,
+             "post":1653182
+          }
+
+       ],
+       "prevYear":2013,
+       "currYear":2014,
+       "co2unit":"lbs"
+    };
 	data = transformJsonToGraphData(debugJSON);
-	normalizedData = normalizeGraphData(data);
-	makeGraph(normalizedData);
-	
+	//normalizedData = normalizeGraphData(data);
+	//makeGraph(normalizedData);
+	makeGraph(data, debugJSON.unit);
 	//normalizedPiData = transformJsonToPieChartData(debugJSON);
 	//makePieChart(normalizedPiData);
 	return;
@@ -129,7 +170,7 @@ function normalizeGraphData(json) {
 
 	return json;
 }
-
+/*TODO maybe work on a pie chart
 function transformJsonToPieChartData(json) {
     currentCo2 = json.currCo2;
     previousCo2 = json.prevCo2;
@@ -143,34 +184,33 @@ function transformJsonToPieChartData(json) {
     
     return data;
 }
-
+*/
 // Transform a json object to a graph data object
 function transformJsonToGraphData(json) {
-	numberOfUtilities = json.utilities.length;
+	numberOfMonths = json.months.length;
 	currentYear = json.currYear;
 	previousYear = json.prevYear;
 
-	console.log("Number of utilities is: " + numberOfUtilities);
+	console.log("Number of utilities is: " + numberOfMonths);
 	console.log("Current year is: " + currentYear);
 	console.log("Prev year is: " + previousYear);
 	
 	data = [];
 	
-	for (i = 0; i < numberOfUtilities; i++) {
-		util = json.utilities[i];
-
-		if (util.currMeasurement == null) continue;
-
-		console.log("Consumable: " + util.type + " Year: " + currentYear + " Value: " + util.currMeasurement);
-		data.push({ "Consumable":util.type, "Year":currentYear, "Value": util.currMeasurement});
-		data.push({ "Consumable":util.type, "Year":previousYear, "Value": util.prevMeasurement});
+	for (i = 0; i < numberOfMonths; i++) {
+		month = json.months[i];
+		if (month.post == null) continue;
+		console.log("Month: " + month.month + " Year: " + currentYear + " Value: " + month.post);
+	   console.log("Month: " + month.month + " Year: " + previousYear + " Value: " + month.pre);
+		data.push({ "Month":month.month, "Year":currentYear, "Value":month.post});
+		data.push({ "Month":month.month, "Year":previousYear, "Value":month.pre});
 	}
 	
 	console.log(data);
 	
 	return data;
 }
-
+/* TODO maybe work on a pie chart
 function makePieChart(json) {
     var w = 200;
     var h = 200;
@@ -213,16 +253,15 @@ function makePieChart(json) {
             return data[i].label;}
         );
 }
-
+*/
 // Make and show the graph
-function makeGraph(json) {
+function makeGraph(json, unit) {
 	// Change title of page to building name
 	var buildingName = json.displayName;
 	
 	chart = new dimple.chart(svg, data);
 	
-	// TODO: Change "color years" in 2020
-    // NEW TODO
+    // TODO
     // We can change these commands to do mod arith on the year, if its even assign the one color, if its odd assign the other
     // I'm not sure where the dimple.chart.assignColor call is going...
 	chart.assignColor("2013", "#6C6C6C", "#6C6C6C", .75);
@@ -235,7 +274,7 @@ function makeGraph(json) {
 	chart.assignColor("2020", "#005794", "#005794", .75);
 	
 	// Bind data to axes
-	x = chart.addCategoryAxis("x", ["Consumable", "Year"]);
+	x = chart.addCategoryAxis("x", ["Month", "Year"]);
 	x.addGroupOrderRule("Year");
 	y = chart.addMeasureAxis("y", "Value");
     x.fontSize = GRAPH_LEGEND_FONT_SIZE;
@@ -261,7 +300,7 @@ function makeGraph(json) {
 	
 	// No x label because it's obvious
 	x.title = null;
-	y.title = "Percentage";
+	y.title = unit;
 
 	legend = chart.addLegend(500, 20, "100%", 400, "left", s);
 	legend.fontSize = GRAPH_LEGEND_FONT_SIZE;
@@ -271,17 +310,18 @@ function makeGraph(json) {
 }
 
 // Given a building code, draws a graph
-function drawGraph(buildingCode) {
+function drawGraph(buildingCode, utilCode) {
     $('#content').empty();
     html = '<div id="chartContainer"><div id="pieChart"></div><div id="chart"><h1 id="buildingName" align="center" style="font-family: sans-serif"></h1></div></div>';
     $('#content').append(html);
-
+   //trying to add utiltily name as header so when fillbackground is called it will 
+   //display proper utility named based of utilcode
     //svg = dimple.newSvg("#chartContainer", 800, 550),
 	svg = dimple.newSvg("#chart", "100%", "100%");
 	
 	// Request JSON building data
-	json = getBuildingJSON(buildingCode, true);
+	json = getBuildingJSON(buildingCode, utilCode, true);
 	
-	fillBuildingTitle(buildingCode);
-    changeBackground(buildingCode);
+	fillBuildingTitle(buildingCode, utilCode);
+   changeBackground(buildingCode);
 }
