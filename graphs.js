@@ -37,11 +37,9 @@ function getParameterByName(name) {
 }
 
 // Fill the building title on the page based on the code, uses buildings.js for lookup
-function fillBuildingTitle(buildingCode) {
+function fillBuildingTitle(buildingName, utilName) {
     // buildings should be in buildings.js, refactored to make gregs life easy
-	if (buildings.hasOwnProperty(buildingCode)) {
-		$('#buildingName').text(buildings[buildingCode] + " - Utility Usage");
-	}
+		$('#buildingName').text(buildingName + " - Utility: " + utilName);
 }
 
 // Given a building code ("OM"), get the JSON representation of waste, etc.
@@ -137,6 +135,8 @@ function getBuildingJSON(buildingCode, debug) {
 	//normalizedData = normalizeGraphData(data);
 	//makeGraph(normalizedData);
 	makeGraph(data, debugJSON.unit);
+
+	fillBuildingTitle(debugJSON.name, debugJSON.utility);
 	//normalizedPiData = transformJsonToPieChartData(debugJSON);
 	//makePieChart(normalizedPiData);
 	return;
@@ -314,14 +314,10 @@ function drawGraph(buildingCode, utilCode) {
     $('#content').empty();
     html = '<div id="chartContainer"><div id="pieChart"></div><div id="chart"><h1 id="buildingName" align="center" style="font-family: sans-serif"></h1></div></div>';
     $('#content').append(html);
-   //trying to add utiltily name as header so when fillbackground is called it will 
    //display proper utility named based of utilcode
     //svg = dimple.newSvg("#chartContainer", 800, 550),
-	svg = dimple.newSvg("#chart", "100%", "100%");
-	
+	svg = dimple.newSvg("#chart", "100%", "100%");	
 	// Request JSON building data
 	json = getBuildingJSON(buildingCode, utilCode, true);
-	
-	fillBuildingTitle(buildingCode, utilCode);
    changeBackground(buildingCode);
 }
