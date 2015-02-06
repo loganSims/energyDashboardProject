@@ -43,14 +43,18 @@ function fillBuildingTitle(buildingName, utilName) {
 }
 
 // Given a building code ("OM"), get the JSON representation of waste, etc.
-function getBuildingJSON(buildingCode, debug) {
+function getBuildingJSON(buildingCode, utilCode, debug) {
     
     console.log("getBuildingJSON called with " + buildingCode);
     
     if (buildingCode == "" || buildingCode == null) return;
 
     //requestAddress = "http://" + window.location.host +  "/lookup?code=" + buildingCode;
-    requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/excelparse.py?code=" + buildingCode;
+
+    requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/monthparse.py?code=" + buildingCode + "&util=" + utilCode;
+
+
+
 
     console.log(requestAddress);
 
@@ -60,68 +64,67 @@ function getBuildingJSON(buildingCode, debug) {
        "code":"AI",
        "utility":"elec",
        "unit":"kWh",
-       "data":"not Sure",
 
        //"currCo2":17639,
        //"prevCo2":44707,
        "months":[
           {
-             "month":"jan",
+             "name":"jan",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"feb",
+             "name":"feb",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"mar",
+             "name":"mar",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"apr",
+             "name":"apr",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"may",
+             "name":"may",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"jun",
+             "name":"jun",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"jul",
+             "name":"jul",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"aug",
+             "name":"aug",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"sep",
+             "name":"sep",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"oct",
+             "name":"oct",
              "pre":1653789,
              "post":1653182,
           },
           {
-             "month":"nov",
+             "name":"nov",
              "pre":1653789,
              "post":1653182
           },
           {
-             "month":"dec",
+             "name":"dec",
              "pre":1653789,
              "post":1653182
           }
@@ -146,12 +149,12 @@ function getBuildingJSON(buildingCode, debug) {
     $.getJSON(requestAddress , function (response) { 
 	console.log("AJAX respone recieved");
 	jsonData = transformJsonToGraphData(response);
-	jsonData = normalizeGraphData(jsonData);
+	//jsonData = normalizeGraphData(jsonData);
 
-	makeGraph(jsonData);     
-        
-        normalizedPiData = transformJsonToPieChartData(jsonData);
-        makePieChart(normalizedPiData);
+	makeGraph(jsonData);      
+	fillBuildingTitle(response.name, response.utility);
+        //normalizedPiData = transformJsonToPieChartData(jsonData);
+        //makePieChart(normalizedPiData);
     });
 }
 
@@ -200,10 +203,10 @@ function transformJsonToGraphData(json) {
 	for (i = 0; i < numberOfMonths; i++) {
 		month = json.months[i];
 		if (month.post == null) continue;
-		console.log("Month: " + month.month + " Year: " + currentYear + " Value: " + month.post);
-	   console.log("Month: " + month.month + " Year: " + previousYear + " Value: " + month.pre);
-		data.push({ "Month":month.month, "Year":currentYear, "Value":month.post});
-		data.push({ "Month":month.month, "Year":previousYear, "Value":month.pre});
+		console.log("Month: " + month.name + " Year: " + currentYear + " Value: " + month.post);
+	   	console.log("Month: " + month.name + " Year: " + previousYear + " Value: " + month.pre);
+		data.push({ "Month":month.name, "Year":currentYear, "Value":month.post});
+		data.push({ "Month":month.name, "Year":previousYear, "Value":month.pre});
 	}
 	
 	console.log(data);
@@ -314,10 +317,9 @@ function drawGraph(buildingCode, utilCode) {
     $('#content').empty();
     html = '<div id="chartContainer"><div id="pieChart"></div><div id="chart"><h1 id="buildingName" align="center" style="font-family: sans-serif"></h1></div></div>';
     $('#content').append(html);
-   //display proper utility named based of utilcode
     //svg = dimple.newSvg("#chartContainer", 800, 550),
-	svg = dimple.newSvg("#chart", "100%", "100%");	
-	// Request JSON building data
-	json = getBuildingJSON(buildingCode, utilCode, true);
-   changeBackground(buildingCode);
+    svg = dimple.newSvg("#chart", "100%", "100%");	
+    // Request JSON building data
+    json = getBuildingJSON(buildingCode, utilCode, false);
+    changeBackground(buildingCode);
 }
