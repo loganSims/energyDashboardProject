@@ -8,6 +8,7 @@
     <title>Green Energy Fee</title>
     <link rel="stylesheet" type="text/css" href="IndexStyle.css">	
     <link rel="stylesheet" type="text/css" href="MenuStyle.css">	
+    <link rel="stylesheet" type="text/css" href="utilMenu.css">	
     <!-- Requests for d3 and dimple libraries -->
     <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
@@ -47,70 +48,15 @@
 	    <!-- BUILDING LIST -->
 	    <li class='has-sub'><a href='#'><span>Building List</span></a>
 	      <ul id="building_list">
-		<li class='has-sub'><a href='#'>Buchanan Towers</a>
-		  <ul id="buchanan_towers">
-			<li><a href='javascript:drawGraph("BT","elec");'>Electric</a></li>
-			<li><a href='javascript:drawGraph("BT","water");'>Water</a></li>
-			<li><a href='javascript:drawGraph("BT","steam");'>Steam</a></li>
-			<li><a href='javascript:drawGraph("BT","garbage");'>Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Old Main</a>
-		  <ul id="old_main">
-			<li><a href='javascript:drawGraph("OM","elec");'>Electric</a></li>
-			<li><a href='javascript:drawGraph("OM","water");'>Water</a></li>
-			<li><a href='javascript:drawGraph("OM","steam");'>Steam</a></li>
-			<li><a href='javascript:drawGraph("OM","garbage");'>Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Bond Hall</a>
-		  <ul id="bond_hall">
-			<li><a href='javascript:drawGraph("BH","elec");'>Electric</a></li>
-			<li><a href='javascript:drawGraph("BH","water");'>Water</a></li>
-			<li><a href='javascript:drawGraph("BH","steam");'>Steam</a></li>
-			<li><a href='javascript:drawGraph("BH","garbage");'>Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Academic Instructional Center</a>
-		  <ul id="academic_instructional_center">
-			<li><a href='javascript:drawGraph("AI","elec");'>Electric</a></li>
-			<li><a href='javascript:drawGraph("AI","water");'>Water</a></li>
-			<li><a href='javascript:drawGraph("AI","steam");'>Steam</a></li>
-			<li><a href='javascript:drawGraph("AI","garbage");'>Garbage</a></li>
-		  </ul>
-		</li>
-		<li class='has-sub'><a href='#'>Communications Facility</a>
-		  <ul id="communications_facility">
-			<li><a href='javascript:drawGraph("CF","elec");'>Electric</a></li>
-			<li><a href='javascript:drawGraph("CF","water");'>Water</a></li>
-			<li><a href='javascript:drawGraph("CF","steam");'>Steam</a></li>
-			<li><a href='javascript:drawGraph("CF","garbage");'>Garbage</a></li>
-		  </ul>
-		</li>
-       		<li class='has-sub'><a href='#'>Biology</a>
-       		  <ul id="biology">
-       		    <li><a href='javascript:drawGraph("BI","elec");'>Electric</a></li>
-       		    <li><a href='javascript:drawGraph("BI","water");'>Water</a></li>
-       		    <li><a href='javascript:drawGraph("BI","steam");'>Steam</a></li>
-       		    <li><a href='javascript:drawGraph("BI","garbage");'>Garbage</a></li>
-       		  </ul>
-       		</li>
-       		<li class='has-sub'><a href='#'>Arntzen Hall</a>
-       		  <ul id="arntzen_hall">
-       		    <li><a href='javascript:drawGraph("AH","elec");'>Electric</a></li>
-       		    <li><a href='javascript:drawGraph("AH","water");'>Water</a></li>
-       		    <li><a href='javascript:drawGraph("AH","steam");'>Steam</a></li>
-       		    <li><a href='javascript:drawGraph("AH","garbage");'>Garbage</a></li>
-       		  </ul>
-       		</li>
-       		<li class='has-sub'><a href='#'>Miller Hall</a>
-       		  <ul id="miller_hall">
-       		    <li><a href='javascript:drawGraph("MH","elec");'>Electric</a></li>
-       		    <li><a href='javascript:drawGraph("MH","water");'>Water</a></li>
-       		    <li><a href='javascript:drawGraph("MH","steam");'>Steam</a></li>
-       		    <li><a href='javascript:drawGraph("MH","garbage");'>Garbage</a></li>
-       		  </ul>
-       		</li>
+		     <li><a href='javascript:drawGraph("BT","elec");'><span>Buchanan Towers</span></a></li>
+			  <li><a href='javascript:drawGraph("OM","elec");'><span>Old Main</span></a></li>
+			  <li><a href='javascript:drawGraph("BH","elec");'><span>Bond Hall</span></a></li>
+			  <li><a href='javascript:drawGraph("AI","elec");'><span>Academic Instructional Center</span></a></li>
+		     <li><a href='javascript:drawGraph("BH","elec");'><span>Bond Hall</span></a></li>							
+           <li><a href='javascript:drawGraph("CF","elec");'><span>Communications Facility</span></a></li>
+			  <li><a href='javascript:drawGraph("BI","elec");'><span>Biology</span></a></li>
+			  <li><a href='javascript:drawGraph("AH","elec");'><span>Arntzen Hall</span></a></li>
+			  <li class='last'><a href='javascript:drawGraph("MH","elec");'><span>Miller Hall</span></a></li>
 
 	      </ul>
 	    </li>

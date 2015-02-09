@@ -315,7 +315,31 @@ function makeGraph(json, unit) {
 // Given a building code, draws a graph
 function drawGraph(buildingCode, utilCode) {
     $('#content').empty();
-    html = '<div id="chartContainer"><div id="pieChart"></div><div id="chart"><h1 id="buildingName" align="center" style="font-family: sans-serif"></h1></div></div>';
+    OLDhtml = '<div id="chartContainer">'+
+                '<div id="pieChart"></div>'+
+                '<div id="chart">'+
+                  '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1>'+
+                '</div>'+
+                '</div>';
+
+    html = '<div id="chartContainer">'+
+        
+             '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>'+
+             //menu
+             '<div id="utilmenu">'+
+	            '<ul>'+
+                 '<li><a href="javascript:drawGraph(\"BT\",\"elec\")">elec</a></li>'+
+                 '<li><a href="javascript:drawGraph(\"BT\",\"steam\")">steam</a></li>'+
+                 '<li><a href="javascript:drawGraph(\"BT\",\"refuse\")">refuse</a></li>'+
+               '</ul>'+
+             '</div>'+
+             //chart section  
+             '<div id="chart">'+
+             '</div>'+
+           
+           '</div>';
+
+
     $('#content').append(html);
     //svg = dimple.newSvg("#chartContainer", 800, 550),
     svg = dimple.newSvg("#chart", "100%", "100%");	
