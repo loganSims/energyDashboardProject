@@ -21,11 +21,10 @@ function changeBackground(buildingCode) {
     }
     
     image += ".jpg";
-    
     console.log("to " + image);
-    console.log($('#chartContainer').css('background'));
-    $('#chartContainer').css('background-image', 'url(' + image + ')');
-    console.log($('#chartContainer').css('background'));
+    console.log($('#bg').css('background'));
+    $('#bg').css('background-image', 'url(' + image + ')');
+    console.log($('#bg').css('background'));
 }
 
 // Does what the function name says it does
@@ -335,7 +334,9 @@ function drawGraph(buildingCode, utilCode) {
                '</ul>'+
              '</div>'+
              //chart section  
-             '<div id="chart">'+
+             '<div id ="bg">'+
+               '<div id ="chart">'+
+               '</div>'+ 
              '</div>'+           
            '</div>';
 
