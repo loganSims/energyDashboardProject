@@ -145,12 +145,12 @@ function getBuildingJSON(buildingCode, utilCode, debug) {
     }
 
     
-    $.getJSON(requestAddress , function (response) { 
+   $.getJSON(requestAddress , function (response) { 
 	console.log("AJAX respone recieved");
 	jsonData = transformJsonToGraphData(response);
 	//jsonData = normalizeGraphData(jsonData);
 
-	makeGraph(jsonData);      
+	makeGraph(jsonData, response.unit);      
 	fillBuildingTitle(response.name, response.utility);
         //normalizedPiData = transformJsonToPieChartData(jsonData);
         //makePieChart(normalizedPiData);
@@ -285,11 +285,11 @@ function makeGraph(json, unit) {
 	// Make bar chart 
 	s = chart.addSeries("Year", dimple.plot.bar);
 	
+   // set height and width based off of containers
     containerWidth = $('#content').width();
     containerHeight = $('#chartContainer').height();
     titleHeight = $('#buildingName').height();
-    
-    width = containerWidth - 100;
+    width = containerWidth - 150;
     height = containerHeight - titleHeight - 150;
     
     console.log("container width is: " + containerWidth);
@@ -298,7 +298,7 @@ function makeGraph(json, unit) {
 	chart.height = height;
     
 	// Order alphebetically by Consumable
-	x.addOrderRule("Year", true);
+	x.addOrderRule(["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]);
 	
 	// No x label because it's obvious
 	x.title = null;
