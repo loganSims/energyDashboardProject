@@ -307,43 +307,33 @@ function makeGraph(json, unit) {
 	legend = chart.addLegend(500, 20, "100%", 400, "left", s);
 	legend.fontSize = GRAPH_LEGEND_FONT_SIZE;
 	
-    console.log("drawing chart");
+   console.log("drawing chart");
 	chart.draw();
 }
 
 // Given a building code, draws a graph
 // writes up html for the building page
 function drawGraph(buildingCode, utilCode) {
-    $('#content').empty();
-    OLDhtml = '<div id="chartContainer">'+
-                '<div id="pieChart"></div>'+
-                '<div id="chart">'+
-                  '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1>'+
-                '</div>'+
-                '</div>';
-
-    html = '<div id="chartContainer">'+
-             '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>'+
-             //menu
-             '<div id="utilmenu">'+
-	       '<ul>'+
-	         '<li><a href=\'javascript:drawGraph(\"OM\",\"elec\");\'><span>elec</span></a></li>'+
-                 '<li><a href=\'javascript:drawGraph(\"OM\",\"water\");\'><span>water</span></a></li>'+
-                 '<li><a href=\'javascript:drawGraph(\"OM\",\"steam\");\'><span>steam</span></a></li>'+
-                 '<li><a href=\'javascript:drawGraph(\"OM\",\"refuse\");\'><span>refuse</span></a></li>'+
-               '</ul>'+
-             '</div>'+
-             //chart section  
-             '<div id ="bg">'+
-               '<div id ="chart">'+
-               '</div>'+ 
-             '</div>'+           
-           '</div>';
-
-    $('#content').append(html);
-    //svg = dimple.newSvg("#chartContainer", 800, 550),
+    //clear chart for new one
+    $("#chart").empty();
     svg = dimple.newSvg("#chart", "100%", "100%");	
     // Request JSON building data
     json = getBuildingJSON(buildingCode, utilCode, false);
     changeBackground(buildingCode);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
