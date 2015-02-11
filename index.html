@@ -8,7 +8,6 @@
     <title>Green Energy Fee</title>
     <link rel="stylesheet" type="text/css" href="IndexStyle.css">	
     <link rel="stylesheet" type="text/css" href="MenuStyle.css">	
-    <link rel="stylesheet" type="text/css" href="utilMenu.css">	
     <!-- Requests for d3 and dimple libraries -->
     <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
@@ -39,66 +38,39 @@
 	<!-- navigation_header -->
 	<div id="navigation_header">
 	  <!-- logo -->					
-	  <img src="logo.png" width=100% ALT="Starflower">							
+	  <img src="logo.png" width=100% ALT="GEF logo">							
 	</div>
 	<!--cssmenu -->				
 	<div id='cssmenu'>
 	  <ul>
 	    <li class='active'><a href='javascript:load_page("home.html");'><span>Home</span></a></li>
-	    <!-- BUILDING LIST -->
-	    <li class='has-sub'><a href='#'><span>Building List</span></a>
-	      <ul id="building_list">
-		     <li><a href='javascript:drawGraph("BT","elec");'><span>Buchanan Towers</span></a></li>
-			  <li><a href='javascript:drawGraph("OM","elec");'><span>Old Main</span></a></li>
-			  <li><a href='javascript:drawGraph("BH","elec");'><span>Bond Hall</span></a></li>
-			  <li><a href='javascript:drawGraph("AI","elec");'><span>Academic Instructional Center</span></a></li>
-		     <li><a href='javascript:drawGraph("BH","elec");'><span>Bond Hall</span></a></li>							
-           <li><a href='javascript:drawGraph("CF","elec");'><span>Communications Facility</span></a></li>
-			  <li><a href='javascript:drawGraph("BI","elec");'><span>Biology</span></a></li>
-			  <li><a href='javascript:drawGraph("AH","elec");'><span>Arntzen Hall</span></a></li>
-			  <li class='last'><a href='javascript:drawGraph("MH","elec");'><span>Miller Hall</span></a></li>
-
-	      </ul>
-	    </li>
+       <li class='active'><a href='javascript:load_page("dashboard.html");'><span>Dashboard</span></a></li>
 	    <li class='last'><a href='javascript:load_page("contact.html");'><span>Contact us</span></a></li>
 	    <li class='has-sub'><a href='#'><span>External Links</span></a>
 	      <ul>
-		<li>
-		  <a href='http://www.wwu.edu/' target='_blank'>
-		    <span>Western Washington University</span>
-		  </a>
-		</li>
-		<li>
-		  <a href='http://www.wwu.edu/sustain/programs/gef/' target='_blank'>
-		    <span>Western Sustainability</span>
-		  </a>
-		</li>
-		<li class='last'>
-		  <a href='https://cst.wwu.edu/computer-science' target='_blank'>
-		    <span>Western Washington University Computer Science Department</span>
-		  </a>
-		</li>
+		     <li>
+		      <a href='http://www.wwu.edu/' target='_blank'>
+		      <span>Western Washington University</span>
+		      </a>
+		    </li>
+		    <li>
+		      <a href='http://www.wwu.edu/sustain/programs/gef/' target='_blank'>
+		      <span>Western Sustainability</span>
+		      </a>
+		    </li>
+		    <li class='last'>
+		      <a href='https://cst.wwu.edu/computer-science' target='_blank'>
+		      <span>Western Washington University Computer Science Department</span>
+		      </a>
+		    </li>
 	      </ul>
 	    </li>
 	  </ul>
 	</div>
-	<!-- navigation_footer 
-	     <div id="navigation_footer">
-	       <h3>navigation_footer</h3>
-	     </div>-->
-      </div>
-      <div id="content">		
-	<div id="chartContainer">					
-	  <div id="chart">
-	    <h1 id="buildingName" align="center"></h1>
-	  </div>
-	</div>								
-	<!-- content_footer -->
-	<!--
-	    <div id="content_footer">
-	      <h3>content_footer<h3>					
-	    </div>		
-	    -->
+  </div>
+       <div id="content">		
+
+	    </div>								
       </div>				
     </div>
   </body>

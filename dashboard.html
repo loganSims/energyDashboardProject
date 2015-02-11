@@ -1,0 +1,45 @@
+<!-- html -->
+<html>
+  <!-- head -->
+    <!-- head -->
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">	
+    <title>Green Energy Fee</title>
+    <link rel="stylesheet" type="text/css" href="IndexStyle.css">	
+    <link rel="stylesheet" type="text/css" href="MenuStyle.css">
+    <link rel="stylesheet" type="text/css" href="utilMenu.css">	
+    <!-- Requests for d3 and dimple libraries -->
+    <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    <!-- jQuery (for JSON parsing and AJAX) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Request for local graphing js -->
+    <script src="buildings.js"></script>
+    <script src="graphs.js"></script>		
+    <!-- Request for local manu_jquery js -->
+    <script type='text/javascript' src='menu_jquery.js'></script>
+				
+  </head>	
+  <body>	
+    <div id="chartContainer">
+     <div id="dashHead">
+        <h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>
+        <div id="utilmenu">
+	       <ul>
+	         <li><a href='javascript:drawGraph("OM","elec");'><span>elec</span></a></li>
+            <li><a href='javascript:drawGraph("OM","water");'><span>water</span></a></li>
+            <li><a href='javascript:drawGraph("OM","steam");'><span>steam</span></a></li>
+            <li><a href='javascript:drawGraph("OM","refuse");'><span>refuse</span></a></li>
+          </ul>
+        </div>
+     </div>
+
+        <div id ="bg">
+           <div id ="chart">
+
+           </div> 
+        </div>           
+     </div>         
+ </body>
+</html>
