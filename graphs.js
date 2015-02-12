@@ -298,7 +298,7 @@ function makeGraph(json, unit) {
 	chart.height = height;
     
 	// Order alphebetically by Consumable
-	x.addOrderRule("Year", true);
+	x.addOrderRule(["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]);
 	
 	// No x label because it's obvious
 	x.title = null;
