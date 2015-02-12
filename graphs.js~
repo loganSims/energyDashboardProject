@@ -21,11 +21,10 @@ function changeBackground(buildingCode) {
     }
     
     image += ".jpg";
-    
     console.log("to " + image);
-    console.log($('#chartContainer').css('background'));
-    $('#chartContainer').css('background-image', 'url(' + image + ')');
-    console.log($('#chartContainer').css('background'));
+    console.log($('#bg').css('background'));
+    $('#bg').css('background-image', 'url(' + image + ')');
+    console.log($('#bg').css('background'));
 }
 
 // Does what the function name says it does
@@ -37,80 +36,125 @@ function getParameterByName(name) {
 }
 
 // Fill the building title on the page based on the code, uses buildings.js for lookup
-function fillBuildingTitle(buildingCode) {
+function fillBuildingTitle(buildingName, utilName) {
     // buildings should be in buildings.js, refactored to make gregs life easy
-	if (buildings.hasOwnProperty(buildingCode)) {
-		$('#buildingName').text(buildings[buildingCode] + " - Utility Usage");
-	}
+		$('#buildingName').text(buildingName + " - Utility: " + utilName);
 }
 
 // Given a building code ("OM"), get the JSON representation of waste, etc.
-function getBuildingJSON(buildingCode, debug) {
-  
-	console.log("getBuildingJSON called with " + buildingCode);
-	
-	if (buildingCode == "" || buildingCode == null) return;
+function getBuildingJSON(buildingCode, utilCode, debug) {
+    
+    console.log("getBuildingJSON called with " + buildingCode);
+    
+    if (buildingCode == "" || buildingCode == null) return;
 
-	requestAddress = "http://" + window.location.host +  "/lookup?code=" + buildingCode;
-    //requestAddress = "http://" + '140.160.141.163' +  "/lookup?code=" + buildingCode;
+    //requestAddress = "http://" + window.location.host +  "/lookup?code=" + buildingCode;
+
+    requestAddress = "http://" + '127.0.1.1' +  "/cgi-bin/monthparse.py?code=" + buildingCode + "&util=" + utilCode;
+
+
+
 
     console.log(requestAddress);
-    if (debug && window.location.host != '140.160.141.163') {
-    var debugJSON = {
-       "code":"AI",
+
+   if (debug && window.location.host != '140.160.141.163') {
+	var debugJSON = {
        "name":"ACADEMIC INSTRUCTION CTR",
-       "currCo2":17639,
-       "prevCo2":44707,
-       "utilities":[
+       "code":"AI",
+       "utility":"elec",
+       "unit":"kWh",
+
+       //"currCo2":17639,
+       //"prevCo2":44707,
+       "months":[
           {
-             "currMeasurement":1339480,
-             "type":"electric",
-             "prevMeasurement":1653182,
-             "unit":"kWh"
+             "name":"jan",
+             "pre":1653789,
+             "post":1653182
           },
           {
-             "currMeasurement":9222909,
-             "type":"steam",
-             "prevMeasurement":8299788,
-             "unit":"thm"
+             "name":"feb",
+             "pre":1653789,
+             "post":1653182
           },
           {
-             "currMeasurement":300,
-             "type":"water",
-             "prevMeasurement":215,
-             "unit":"CCF"
+             "name":"mar",
+             "pre":1653789,
+             "post":1653182
           },
           {
-             "currMeasurement":null,
-             "type":"refuse",
-             "prevMeasurement":null,
-             "unit":"yds"
+             "name":"apr",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"may",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"jun",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"jul",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"aug",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"sep",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"oct",
+             "pre":1653789,
+             "post":1653182,
+          },
+          {
+             "name":"nov",
+             "pre":1653789,
+             "post":1653182
+          },
+          {
+             "name":"dec",
+             "pre":1653789,
+             "post":1653182
           }
+
        ],
        "prevYear":2013,
        "currYear":2014,
        "co2unit":"lbs"
     };
-    data = transformJsonToGraphData(debugJSON);
-    normalizedData = normalizeGraphData(data);
-    makeGraph(normalizedData);
-    
-    normalizedPiData = transformJsonToPieChartData(debugJSON);
-    //makePieChart(normalizedPiData);
-    return;
+	data = transformJsonToGraphData(debugJSON);
+	//normalizedData = normalizeGraphData(data);
+	//makeGraph(normalizedData);
+	makeGraph(data, debugJSON.unit);
+
+	fillBuildingTitle(debugJSON.name, debugJSON.utility);
+	//normalizedPiData = transformJsonToPieChartData(debugJSON);
+	//makePieChart(normalizedPiData);
+	return;
     }
 
-        
-	$.getJSON(requestAddress , function (response) { 
-		console.log("AJAX respone recieved");
-		jsonData = transformJsonToGraphData(response);
-		jsonData = normalizeGraphData(jsonData);
+    
+    $.getJSON(requestAddress , function (response) { 
+	console.log("AJAX respone recieved");
+	jsonData = transformJsonToGraphData(response);
+	//jsonData = normalizeGraphData(jsonData);
 
-		makeGraph(jsonData);     
-        
-        normalizedPiData = transformJsonToPieChartData(debugJSON);
+	makeGraph(jsonData);      
+	fillBuildingTitle(response.name, response.utility);
+        //normalizedPiData = transformJsonToPieChartData(jsonData);
         //makePieChart(normalizedPiData);
-	});
+    });
 }
 
 // Normalize the graph data so that 2013 data shows 100% and 2014 is a percentage of
@@ -128,13 +172,12 @@ function normalizeGraphData(json) {
 
 	return json;
 }
-
+/*TODO maybe work on a pie chart
 function transformJsonToPieChartData(json) {
     currentCo2 = json.currCo2;
     previousCo2 = json.prevCo2;
-    
-	currentYear = json.currYear;
-	previousYear = json.prevYear;
+    currentYear = json.currYear;
+    previousYear = json.prevYear;
     
     data = [
         {"label":previousYear.toString(), "value":previousCo2},
@@ -143,34 +186,33 @@ function transformJsonToPieChartData(json) {
     
     return data;
 }
-
+*/
 // Transform a json object to a graph data object
 function transformJsonToGraphData(json) {
-	numberOfUtilities = json.utilities.length;
+	numberOfMonths = json.months.length;
 	currentYear = json.currYear;
 	previousYear = json.prevYear;
 
-	console.log("Number of utilities is: " + numberOfUtilities);
+	console.log("Number of utilities is: " + numberOfMonths);
 	console.log("Current year is: " + currentYear);
 	console.log("Prev year is: " + previousYear);
 	
 	data = [];
 	
-	for (i = 0; i < numberOfUtilities; i++) {
-		util = json.utilities[i];
-
-		if (util.currMeasurement == null) continue;
-
-		console.log("Consumable: " + util.type + " Year: " + currentYear + " Value: " + util.currMeasurement);
-		data.push({ "Consumable":util.type, "Year":currentYear, "Value": util.currMeasurement});
-		data.push({ "Consumable":util.type, "Year":previousYear, "Value": util.prevMeasurement});
+	for (i = 0; i < numberOfMonths; i++) {
+		month = json.months[i];
+		if (month.post == null) continue;
+		console.log("Month: " + month.name + " Year: " + currentYear + " Value: " + month.post);
+	   	console.log("Month: " + month.name + " Year: " + previousYear + " Value: " + month.pre);
+		data.push({ "Month":month.name, "Year":currentYear, "Value":month.post});
+		data.push({ "Month":month.name, "Year":previousYear, "Value":month.pre});
 	}
 	
 	console.log(data);
 	
 	return data;
 }
-
+/* TODO maybe work on a pie chart
 function makePieChart(json) {
     var w = 200;
     var h = 200;
@@ -213,15 +255,17 @@ function makePieChart(json) {
             return data[i].label;}
         );
 }
-
+*/
 // Make and show the graph
-function makeGraph(json) {
+function makeGraph(json, unit) {
 	// Change title of page to building name
 	var buildingName = json.displayName;
 	
 	chart = new dimple.chart(svg, data);
 	
-	// TODO: Change "color years" in 2020
+    // TODO
+    // We can change these commands to do mod arith on the year, if its even assign the one color, if its odd assign the other
+    // I'm not sure where the dimple.chart.assignColor call is going...
 	chart.assignColor("2013", "#6C6C6C", "#6C6C6C", .75);
 	chart.assignColor("2014", "#005794", "#005794", .75);
 	chart.assignColor("2015", "#6C6C6C", "#6C6C6C", .75);
@@ -232,7 +276,7 @@ function makeGraph(json) {
 	chart.assignColor("2020", "#005794", "#005794", .75);
 	
 	// Bind data to axes
-	x = chart.addCategoryAxis("x", ["Consumable", "Year"]);
+	x = chart.addCategoryAxis("x", ["Month", "Year"]);
 	x.addGroupOrderRule("Year");
 	y = chart.addMeasureAxis("y", "Value");
     x.fontSize = GRAPH_LEGEND_FONT_SIZE;
@@ -258,7 +302,7 @@ function makeGraph(json) {
 	
 	// No x label because it's obvious
 	x.title = null;
-	y.title = "Percentage";
+	y.title = unit;
 
 	legend = chart.addLegend(500, 20, "100%", 400, "left", s);
 	legend.fontSize = GRAPH_LEGEND_FONT_SIZE;
@@ -268,17 +312,38 @@ function makeGraph(json) {
 }
 
 // Given a building code, draws a graph
-function drawGraph(buildingCode) {
+// writes up html for the building page
+function drawGraph(buildingCode, utilCode) {
     $('#content').empty();
-    html = '<div id="chartContainer"><div id="pieChart"></div><div id="chart"><h1 id="buildingName" align="center" style="font-family: sans-serif"></h1></div></div>';
-    $('#content').append(html);
+    OLDhtml = '<div id="chartContainer">'+
+                '<div id="pieChart"></div>'+
+                '<div id="chart">'+
+                  '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1>'+
+                '</div>'+
+                '</div>';
 
+    html = '<div id="chartContainer">'+
+             '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>'+
+             //menu
+             '<div id="utilmenu">'+
+	       '<ul>'+
+	         '<li><a href=\'javascript:drawGraph(\"OM\",\"elec\");\'><span>elec</span></a></li>'+
+                 '<li><a href=\'javascript:drawGraph(\"OM\",\"water\");\'><span>water</span></a></li>'+
+                 '<li><a href=\'javascript:drawGraph(\"OM\",\"steam\");\'><span>steam</span></a></li>'+
+                 '<li><a href=\'javascript:drawGraph(\"OM\",\"refuse\");\'><span>refuse</span></a></li>'+
+               '</ul>'+
+             '</div>'+
+             //chart section  
+             '<div id ="bg">'+
+               '<div id ="chart">'+
+               '</div>'+ 
+             '</div>'+           
+           '</div>';
+
+    $('#content').append(html);
     //svg = dimple.newSvg("#chartContainer", 800, 550),
-	svg = dimple.newSvg("#chart", "100%", "100%");
-	
-	// Request JSON building data
-	json = getBuildingJSON(buildingCode, true);
-	
-	fillBuildingTitle(buildingCode);
+    svg = dimple.newSvg("#chart", "100%", "100%");	
+    // Request JSON building data
+    json = getBuildingJSON(buildingCode, utilCode, false);
     changeBackground(buildingCode);
 }
