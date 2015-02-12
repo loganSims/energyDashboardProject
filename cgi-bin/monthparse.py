@@ -80,8 +80,11 @@ def build(building, code, util):
 
 
 	#TODO find place to get year!!!! maybe URL?
-	preyear = 2013
-	curyear = 2014
+	#preyear = 2013
+	#curyear = 2014
+        
+        preyear = date.today().year
+        curyear = date.today().year - 1
 
 	building.currYear = curyear
 	building.prevYear = preyear
