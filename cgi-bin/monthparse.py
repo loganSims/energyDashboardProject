@@ -23,24 +23,24 @@ class BuildingUtilData:
 	code = ""
 	utility = None
 	unit = None
-	data = None
+	months = None
 
 	def __init__(self, code, util):
 		self.code = code
 		self.utility = util
 
-		jan = { 'month' : 'jan', 'pre' : None, 'post' : None }
-		feb = { 'month' : 'feb', 'pre' : None, 'post' : None }
-		mar = { 'month' : 'mar', 'pre' : None, 'post' : None }
-		apr = { 'month' : 'apr', 'pre' : None, 'post' : None }
-		may = { 'month' : 'may', 'pre' : None, 'post' : None }
-		jun = { 'month' : 'jun', 'pre' : None, 'post' : None }
-		jul = { 'month' : 'jul', 'pre' : None, 'post' : None }
-		aug = { 'month' : 'aug', 'pre' : None, 'post' : None }
-		sep = { 'month' : 'sep', 'pre' : None, 'post' : None }
-		oct = { 'month' : 'oct', 'pre' : None, 'post' : None }
-		nov = { 'month' : 'nov', 'pre' : None, 'post' : None }
-		dec = { 'month' : 'dec', 'pre' : None, 'post' : None }
+		jan = { 'name' : 'jan', 'pre' : None, 'post' : None }
+		feb = { 'name' : 'feb', 'pre' : None, 'post' : None }
+		mar = { 'name' : 'mar', 'pre' : None, 'post' : None }
+		apr = { 'name' : 'apr', 'pre' : None, 'post' : None }
+		may = { 'name' : 'may', 'pre' : None, 'post' : None }
+		jun = { 'name' : 'jun', 'pre' : None, 'post' : None }
+		jul = { 'name' : 'jul', 'pre' : None, 'post' : None }
+		aug = { 'name' : 'aug', 'pre' : None, 'post' : None }
+		sep = { 'name' : 'sep', 'pre' : None, 'post' : None }
+		oct = { 'name' : 'oct', 'pre' : None, 'post' : None }
+		nov = { 'name' : 'nov', 'pre' : None, 'post' : None }
+		dec = { 'name' : 'dec', 'pre' : None, 'post' : None }
 		self.months = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
 
 
@@ -80,11 +80,11 @@ def build(building, code, util):
 
 
 	#TODO find place to get year!!!! maybe URL?
-	#preyear = 2013
-	#curyear = 2014
+	preyear = 2013
+	curyear = 2014
         
-        preyear = date.today().year
-        curyear = date.today().year - 1
+        #preyear = date.today().year
+        #curyear = date.today().year - 1
 
 	building.currYear = curyear
 	building.prevYear = preyear
@@ -96,8 +96,8 @@ def build(building, code, util):
 			#TODO add function find building column?
 
 			#gets building row
-			buildingName = BuildingNames[code]
-			building_row = findBuildingRow(sheet, buildingMame)
+			building.name = BuildingNames[code]
+			building_row = findBuildingRow(sheet, building.name)
 
 			#print("processing sheet\n")
 			for i in range(0, 12):
@@ -105,15 +105,12 @@ def build(building, code, util):
 				#gets month col for preyear
 				mColumn = findMonthColumn(sheet, months[i], book.datemode, preyear)
 				#set month data in utilpre of data to measurement
-				building.data[i]['pre'] = getMeasurement(sheet, mColumn, building_row)
+				building.months[i]['pre'] = getMeasurement(sheet, mColumn, building_row)
 
 				#gets month col for curyear
 				mColumn = findMonthColumn(sheet, months[i], book.datemode, curyear)
 				#set month data in utilcur of data to measurement
-				building.data[i]['post'] = getMeasurement(sheet, mColumn, building_row)
-
-
-			building.name = getBuildingName(sheet[sh], building_row)
+				building.months[i]['post'] = getMeasurement(sheet, mColumn, building_row)
 
 	except Exception as e:
 		pass
