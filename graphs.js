@@ -150,7 +150,7 @@ function getBuildingJSON(buildingCode, utilCode, debug) {
 	jsonData = transformJsonToGraphData(response);
 	//jsonData = normalizeGraphData(jsonData);
 
-	makeGraph(jsonData);      
+	makeGraph(jsonData, response.unit);      
 	fillBuildingTitle(response.name, response.utility);
         //normalizedPiData = transformJsonToPieChartData(jsonData);
         //makePieChart(normalizedPiData);
@@ -323,7 +323,6 @@ function drawGraph(buildingCode, utilCode) {
                 '</div>';
 
     html = '<div id="chartContainer">'+
-             '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>'+
              //menu
              '<div id="utilmenu">'+
 	       '<ul>'+
@@ -333,6 +332,7 @@ function drawGraph(buildingCode, utilCode) {
                  '<li><a href=\'javascript:drawGraph(\"OM\",\"refuse\");\'><span>refuse</span></a></li>'+
                '</ul>'+
              '</div>'+
+             '<h1 id="buildingName" align="center" style="font-family: sans-serif"></h1><br>'+
              //chart section  
              '<div id ="bg">'+
                '<div id ="chart">'+
