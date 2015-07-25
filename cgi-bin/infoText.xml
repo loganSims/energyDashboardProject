@@ -1,0 +1,196 @@
+<info>
+<!-- source: http://en.wikipedia.org/wiki/Kilowatt_hour -->
+<electric>
+The kilowatt-hour (kWh) is used as a billing unit for energy delivered to consumers by electric utilities. If the energy is being transmitted or used at a constant rate over a period of time, the total energy in kilowatt-hours is the product of the power in kilowatts and the time in hours.
+</electric>
+<!-- source: https://www.energyvortex.com/energydictionary/british_thermal_unit_%28btu%29__mbtu__mmbtu.html -->
+<steam>
+A BTU is the amount of heat required to increase the temperature of 16 ounces of water by one degree Fahrenheit. A wooden kitchen match produce approximately 1 BTU.
+
+Western Washington University's steam consumption is measuered in Mbtu which stands for one thousand BTU.
+</steam>
+<!-- Arntzen -->
+<aAH> 
+Arntzen Hall is an Academic and Campus Services building. It is home to the Anthropology, Environmental Studies, Geography, Political Science, and Sociology departments. The data here does not include the Arntzen food facility, aka the Atrium.
+</aAH>
+<!--Academic inst.  -->
+<aAI> 
+The Academic Instructional Center is home to the Communication Sciences and Disorders and Psychology departments. 
+</aAI>
+<!-- Arntzen food facility -->
+<sAF>
+Also know as the Atrium, this facility houses many food services for students such as Subway, Provisions On Demand (P.O.D.), Starbucks, and Topios.
+</sAF>
+<!-- Bond Hall -->
+<aBH>
+Bond Hall is home to the History, Liberal Studies, Mathematics and Philosophy departments as well as the College of Sciences and Technology.
+</aBH>
+<!-- Biology -->
+<aBI>
+As the name implies, the Biology building is home to the Biology department, in addition to their lecture halls.
+</aBI>
+<!-- Bookstore -->
+<sBS>
+The WWU Bookstore is your on campus solution for textbooks and school supplies, located next to the Viking Union building.
+</sBS>
+<!-- Buchanan towers -->
+<rBT>
+Buchanan Towers is a University Residence building. In 2011 Buchanan Towers was expanded to include Buchanan Towers East. Buchanan Towers also houses the Outdoor Center Bike Shop and the BT Station Café and Market.
+</rBT>
+<!-- Chemistry Building -->
+<aCB>
+The Karen W. Morse Hall (formerly known as the Chemistry Building) is home to the Chemisty department.
+</aCB>
+<!-- Carver Gym -->
+<sCG>
+Carver Gym (formerly known as the Physical Education Building) was completed in 1936, with an addition added in 1962. Home to the Athletic Department, this building sees continued use as a space for activites and the battleground for WWU's basketball teams.
+</sCG>
+<!-- College Hall-->
+<aCH>
+Home to the American Cultural Studies and the Honors Program, College hall also houses the office for Summer Sessions, Extended Education, and International Programs and Exchanges.
+</aCH>
+<!-- Communications-->
+<aCF>
+Communications Facility is home to the Communication, Computer Science, Journalism, and the Physics/Astronomy departments, in addition to its 7 computer labs.
+</aCF>
+<!--Commissary -->
+<aCO>
+The Commisasary is located near Buchanan Towers.
+</aCO>
+<!-- Campus Services -->
+<aCS>
+Campus Services is home to the Parking Services Office, Public Safety (Campus Police), the Student Health Center, and the Visitor Information Center.
+</aCS>
+<!-- Environmental Studies-->
+<aES>
+The Environmental Studies is home to the following departments: College of Humanities and Social Sciences, Environmental Sciences, Environmental Studies, Geology, and the Huxley College of the Environment. The Environmental Center also houses admissions for the related majors.
+</aES>
+<!--Edens North -->
+<rEN>
+Edens North was added to Edens Hall in 1955, and housed women until 1968, when it temporarily became part of Fairhaven College. It was reopened in 1994 as a dormitory after a complete renovation.
+</rEN>
+<!-- Edens South-->
+<rEH>
+Edens Hall was oringally a wooden dining hall built in 1903, and became the first campus dormitory in 1907, housing 28 women. The brick version we have today was built in 1921, and along with Edens North added in 1955, continued to house women until 1968, when it temporarily became Fairhaven College. Edens Hall was closed in the late 1970's, and reopened in 1994 as a dormitory after a complete renovation.
+</rEH>
+<!-- Engineering Tech -->
+<aET>
+Ross Engineering Technology (or the Engineering Tech building) is home to the Engineering Technology department.
+</aET>
+<!-- Fairhaven academic -->
+<aFH>
+Home to Fairhaven College and Fairhaven College Admissions, the Fairhaven Academic building also houses the Fairhaven Commons and the Haven Market/Cafe.
+</aFH>
+<!-- Fairhaven commons -->
+<sFC>
+Found within the Fairhaven Academic building, the Fairhaven Commons is a residential dining hall, and also houses the Haven Market/Cafe. Fairhaven Commons and Towers share steam usage. For this information please see Fairhaven Towers.
+</sFC>
+<!--Fine arts -->
+<aFI>
+The Fine Arts Building is home to the Art/Art History department, and features the Western Gallery.
+</aFI>
+<!--Fairhaven Towers -->
+<rFT>
+Fairhaven Towers is a residence hall on campus, and features the Associated Students Child Development Center (Daycare), and close proximity to the Fairhaven Academic building. Fairhaven Towers and Commons share steam usage.
+</rFT>
+<!-- Fraser Hall-->
+<aFR>
+Fraser Hall is known for it's large lecture hall. 
+</aFR>
+<!--Haggard -->
+<aHA>
+Haggard Hall features access to Wilson Library, print and copy services, and four computer labs.
+</aHA>
+<!-- Higginson-->
+<rHI>
+Higginson is a residential hall on the edge of North campus. With 5 floors and multiple lounges, Higginsons suite style rooms tend to be popular.
+</rHI>
+<!--Highland -->
+<rHL>
+Highland Hall is on the north edge of the Ridge, and is part of the larger SHADO community, which consists of Sigma, Highland, Alpha, Delta, and Omega. Highland features suite style rooms and close proximity to main campus buildings.
+</rHL>
+<!--Humanities -->
+<aHU>
+Humanities sits between Red Square and Old Main, and is home to Human Resources.
+</aHU>
+<!-- Mathes -->
+<rMA>
+Neighbor to Nash, Mathes is on the North side of campus and can hold up to 300 residents.
+</rMA>
+<!--Miller Hall Coffee Shop -->
+<sMC>
+Miller Market is located near the center of campus inside Miller Hall, and features a variety of drinks, snacks, and their own coffee shop.
+</sMC>
+<!-- Miller Hall -->
+<aMH>
+Miller Hall is home to the following departments: Center for International Studies, Human Services and Rehabilitation, Modern and Classical Languages, Teacher Education, Woodring College of Education, and Women studies.
+</aMH>
+<!-- Nash -->
+<rNA>
+Nash is a residence hall located on North campus, and can hold up to 348 residents.
+</rNA>
+<!--Old Main-->
+<aOM>
+Old Main was built in 1896, and is home to the Academic Advising Center, Admissions, Financial Aid, the Student Employment Center, and many more offices and services to assist students.
+</aOM>
+<!--Performing Arts-->
+<aPA>
+The PAC (Performing Arts Center) is home to the College of Fine and Performing Arts, the Music department, and the Theatre Arts department.
+</aPA>
+<!--Parks Hall-->
+<aPH>
+Parks Hall is home to the following departments: Accounting, College of Business and Economics, Decision Sciences, Economics, Finance and Marketing, and Management.
+</aPH>
+<!--RDG Alpha-->
+<rRA>
+Ridgeway Alpha is a University Residence building. Alpha is part of the larger SHADO community, which consists of Sigma, Highland, Alpha, Delta, and Omega.
+</rRA>
+<!--RDG Beta-->
+<rRB>
+Ridgeway Beta is a University Residence building. Beta is part of the larger Beta-Gamma community.
+</rRB>
+<!--RDG Delta -->
+<rRD>
+Ridgeway Delta is a University Residence building. Delta is part of the larger SHADO community, which consists of Sigma, Highland, Alpha, Delta, and Omega.
+</rRD>
+<!--RDG Gamma -->
+<rRG>
+Ridgeway Gamma is a University Residence building. Gamma is part of the larger Beta-Gamma community.
+</rRG>
+<!--RDG Kappa -->
+<rRK>
+Ridgeway Kappa is a University Residence building. Unlike the other Ridgeway buildings, Kappa is not part of either the SHADO community or the Beta-Gamma community.
+</rRK>
+<!--RDG Omega -->
+<rRO>
+Ridgeway Omega is a University Residence building. Omega is part of the larger SHADO community, which consists of Sigma, Highland, Alpha, Delta, and Omega.
+</rRO>
+<!--RDG Sigma -->
+<rRS>
+Ridgeway Sigma is a University Residence building. Sigma is part of the larger SHADO community, which consists of Sigma, Highland, Alpha, Delta, and Omega.
+</rRS>
+<!--Ridgeway Dining-->
+<sRC>
+Ridgeway Commons (or RC) is the residential dining hall for the Ridgeway complex.
+</sRC>
+<!--SMATE -->
+<aSM>
+The Science, Math, and Technology Education building (SMATE) is located near the Chemistry building, between Carver Gym and the Ridgeway complex.
+</aSM>
+<!--Student Rec -->
+<sSR>
+The Wade King Recreation Center (Student Rec) is home to the Campus Recreation Services, which offers WWU's Intramural Sports. Rock's Edge Cafe is also located in the Student Rec.
+</sSR>
+<!-- Viking Commons -->
+<sVC>
+The Viking Commons is the residential dining hall for North campus, and can be found between the Viking Union and Mathes.
+</sVC>
+<!-- Viking Union-->
+<sVU>
+The Viking Union is home to Associated Students, the Ethnic Student Center, LGBTA, Off-Campus Housing, the Outdoor Center, and KUGS 89.3 FM. Viking Union is located between Viking Commons and the Bookstore.
+</sVU>
+<!-- Wilson Library -->
+<aWL>
+Wilson Library was built in 1928, renovated in 1947, and gained an addition in 1962. In 1973 more room was added to hold the then-collection of 235,000 volumes. Wilson Library is home to the Tutoring Center and the Wilson Library Map Collection.
+</aWL>
+</info>

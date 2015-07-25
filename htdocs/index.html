@@ -1,0 +1,153 @@
+<!-- html -->
+<!-- <html overflow-y="scroll"> -->
+<html>
+  <!-- head -->
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">	
+    <title>WWU Energy Dashboards</title>
+    <link rel="stylesheet" type="text/css" href="css/IndexStyle.css">	
+    <link rel="stylesheet" type="text/css" href="css/MenuStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/utilMenu.css">	
+    <!-- Requests for d3 and dimple libraries -->
+    <script src="d3/d3.js"></script>
+    <script src="javascript/dimple/dist/dimple.v2.1.6.min.js"></script>
+
+	<!-- D3pie -->
+	<script src="javascript/d3pie/d3pie.min.js"></script>
+
+    <!-- jQuery (for JSON parsing and AJAX) -->
+    <script src="Jquery/jquery-1.11.3.min.js"></script>
+    <!-- Request for local graphing js -->
+    <script src="javascript/buildings.js"></script>
+    <script src="javascript/graphs.js"></script>		
+    <script src="javascript/summary.js"></script>		
+    <!-- Request for local manu_jquery js -->
+    <script type='text/javascript' src='javascript/menu_jquery.js'></script>
+    <!-- Javascript to load pages -->	
+    <script language="JavaScript">	
+      function load_page(page)
+      { 			
+      $("#content").load(page);			
+      }	
+      
+      $( document ).ready(function(){ 
+      load_page('newHome.html');
+      });
+    </script>					
+  </head>	
+  
+  <!-- body -->
+  <body>			
+		<div id="banner">
+
+	<div  style="font-size:40px; color: #FFFFFF; padding-left:20px; padding-top:10px">Energy Dashboards</div>
+	<div  style="font-size:30px; color: #FFFFFF; padding-left:20px; padding-top:10px">Information is power!</div>
+	<!-- Western logo -->
+	<img src="images/westernlogo_white.png" width=17% ALT="WWUlogo"  style="position: absolute; top:5px; right:5px; z-index:99;">	
+
+		</div id="banner">
+      <div id="navigation">
+	<!--cssmenu -->				
+	<div id="cssmenu" style="float:up">
+	  <ul>
+	    <li class='active'><a href='javascript:load_page("newHome.html");'><span>Summary</span></a></li>
+	    <!-- LIST OF BUILDINGS -->
+		<li class='has-sub'><a href='#'>Residence Halls</a>
+		  <ul style="display: none;">
+		    <li><a href='javascript:makeDashboard("rBT","electric", "Buchanan Towers");'>Buchanan Towers</a></li>
+		    <li><a href='javascript:makeDashboard("rEN","electric", "Edens North");'>Edens North</a></li>
+		    <li><a href='javascript:makeDashboard("rEH","electric", "Edens Hall");'>Edens Hall</a></li>
+		    <li><a href='javascript:makeDashboard("rFT","electric", "Fairhaven Towers");'>Fairhaven Towers</a></li>
+		    <li><a href='javascript:makeDashboard("rHI","electric", "Higginson");'>Higginson</a></li>
+		    <li><a href='javascript:makeDashboard("rHL","electric", "Highland");'>Highland</a></li>
+		    <li><a href='javascript:makeDashboard("rMA","electric", "Mathes");'>Mathes</a></li>
+		    <li><a href='javascript:makeDashboard("rNA","electric", "Nash");'>Nash</a></li>
+		    <li><a href='javascript:makeDashboard("rRA","electric", "Ridge Alpha");'>Ridge Alpha</a></li>
+		    <li><a href='javascript:makeDashboard("rRB","electric", "Ridge Beta");'>Ridge Beta</a></li>
+		    <li><a href='javascript:makeDashboard("rRD","electric", "Ridge Delta");'>Ridge Delta</a></li>
+		    <li><a href='javascript:makeDashboard("rRG","electric", "Ridge Gamma");'>Ridge Gamma</a></li>
+		    <li><a href='javascript:makeDashboard("rRK","electric", "Ridge Kappa");'>Ridge Kappa</a></li>
+		    <li><a href='javascript:makeDashboard("rRO","electric", "Ridge Omega");'>Ridge Omega</a></li>
+		    <li><a href='javascript:makeDashboard("rRS","electric", "Ridge Sigma");'>Ridge Sigma</a></li>
+		  </ul>
+		</li>
+
+
+		<li class='has-sub'><a href='#'>Academic Buildings</a>
+		  <ul style="display: none;">
+		    <li><a href='javascript:makeDashboard("aAI","electric","Academic Inst. Center");'><span>Academic Inst. Center</span></a></li>
+		    <li><a href='javascript:makeDashboard("aAH","electric","Arntzen Hall");'><span>Arntzen Hall</span></a></li>
+		    <li><a href='javascript:makeDashboard("aBI","electric","Biology");'><span>Biology</span></a></li>
+		    <li><a href='javascript:makeDashboard("aBH","electric","Bond Hall");'><span>Bond Hall</span></a></li>
+		    <li><a href='javascript:makeDashboard("aCF","electric","Communications Facility");'><span>Communications Facility</span></a></li>
+		    <li><a href='javascript:makeDashboard("aCS","electric","Campus Services");'><span>Campus Services</span></a></li>
+		    <li><a href='javascript:makeDashboard("aCB","electric","Chemistry Building");'><span>Chemistry Building</span></a></li>
+		    <li><a href='javascript:makeDashboard("aCH","electric","College Hall");'>College Hall</a></li>
+		    <li><a href='javascript:makeDashboard("aCO","electric","Commissary");'>Commissary</a></li>
+		    <li><a href='javascript:makeDashboard("aET","electric","Engineering Tech");'>Engineering Tech</a></li>
+		    <li><a href='javascript:makeDashboard("aES","electric","Environmental Studies");'>Enviromental Studies</a></li>
+		    <li><a href='javascript:makeDashboard("aFH","electric","Fairhaven Academic");'>Fairhaven Academic</a></li>
+		    <li><a href='javascript:makeDashboard("aFI","electric","Fine Arts");'>Fine Arts</a></li>
+		    <li><a href='javascript:makeDashboard("aFR","electric","Fraser Hall");'>Fraser Hall</a></li>
+		    <li><a href='javascript:makeDashboard("aHA","electric","Haggard Hall");'>Haggard Hall</a></li>
+		    <li><a href='javascript:makeDashboard("aHU","electric","Humanities");'>Humanities</a></li>
+		    <li><a href='javascript:makeDashboard("aMH","electric", "Miller Hall");'>Miller Hall</a></li>
+		    <li><a href='javascript:makeDashboard("aOM","electric","Old Main");'>Old Main</a></li>
+		    <li><a href='javascript:makeDashboard("aPH","electric", "Parks Hall");'>Parks Hall</a></li>
+		    <li><a href='javascript:makeDashboard("aPA","electric", "Performing Arts");'>Performing Arts</a></li>
+		    <li><a href='javascript:makeDashboard("aSM","electric", "Smate");'>Smate</a></li>
+		    <li><a href='javascript:makeDashboard("aWL","electric", "Wilson Library");'>Wilson Library</a></li>    
+		  </ul>
+		</li>
+		<li class='has-sub'><a href='#'>Student Buildings</a>
+		  <ul style="display: none;">
+
+		    <li><a href='javascript:makeDashboard("sBS","electric", "Bookstore");'>Bookstore</a></li>
+		    <li><a href='javascript:makeDashboard("sCG","electric", "Carver Gym");'>Carver Gym</a></li>
+		    <li><a href='javascript:makeDashboard("sFC","electric", "Fairhaven Commons");'>Fairhaven Commons</a></li>
+		    <li><a href='javascript:makeDashboard("sRC","electric", "Ridgeway Commons");'>Ridgeway Commons</a></li>
+		    <li><a href='javascript:makeDashboard("sSR","electric", "Student Recreation");'>Student Recreation</a></li>
+		    <li><a href='javascript:makeDashboard("sVC","electric", "Viking Commons");'><span>Viking Commons</span></a></li>
+		    <li><a href='javascript:makeDashboard("sVU","electric", "Viking Union");'>Viking Union</a></li>
+
+		</li>
+	      </ul>
+	    </li><!-- Cap the Dashboard list item -->
+	    <li class='has-sub'><a href='#'><span>External Links</span></a>
+	      <ul style="display: none;">
+		<li>
+		  <a href='http://oaspub.epa.gov/powpro/ept_pack.charts' target='_blank'>
+		    <span>EPA’s Power Profiler website</span>
+		  </a>
+		</li>		
+		<li>
+		  <a href='http://www.wwu.edu/' target='_blank'>
+		    <span>Western Washington University</span>
+		  </a>
+		</li>
+		<li>
+		  <a href='http://www.wwu.edu/sustain/programs/gef/' target='_blank'>
+		    <span>Western Sustainability</span>
+		  </a>
+		</li>
+		<li class='last'>
+		  <a href='https://cst.wwu.edu/computer-science' target='_blank'>
+		    <span>Western Washington University Computer Science Department</span>
+		  </a>
+		</li>
+	      </ul>
+	    </li>
+	  </ul>
+
+	</div id= "navagation">	
+
+	<!-- GEF logo -->
+	<img src="images/logo.png" width=70% ALT="GEFlogo">	
+
+      </div>
+      <!-- This 'content' div is where the javascript shoves the building html code -->
+      <div id="content"></div>	
+		
+  </body>
+</html>

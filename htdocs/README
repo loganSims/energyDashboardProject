@@ -1,0 +1,149 @@
+# WWU Energy dashboards website #
+
+### This document contains information and instructions on ###
+###          updating various parts of the website         ###
+
+**SECTION 0: files**
+
+  Main directory
+
+    index.html - main page for website, uses JavaScript to load different 
+                 dashboards into it's content div
+
+    newHome.html - page that index.html loads into content div that displays 
+                   campus summary dashboard
+
+    ScreenShot.html - page that displays dashboards for A.S displays. 
+    For more information on this process see README.txt 
+    in the TVScreenshots directory.
+
+  CSS
+
+    IndexStyle.css - main CSS file for most of the site. 
+                     Has the formatting for building dashboards.
+
+    MenuStyle.css - For index navigation menu.
+
+    UtilMenu.css - For utility and year select menu on a buildings dashboard.
+
+    ScreenShotStyle.css - Formatting for ScreenShot.html, similar to 
+                          formatting found in IndexStyle.html.
+
+  Images
+
+    Holds website logos and images for dashboard utility menu.
+
+  JavaScript 
+
+    graphs.js – JavaScript file that handles making a buildings dashboard. 
+                The function makeDashboard in this file gets 
+                called in index.html to populate the "content" div with a 
+                building’s dashboard.  graphs.js also makes two AJAX calls to 
+                python scripts in cgi-bin for building descriptions and data. 
+
+    summary.js – Handles making the summary dashboard that 
+                 is displayed in newHome.html.
+
+    ScreenshotGraphs.js – Makes dashboard for ScreenShots.html 
+                          in similar way to graphs.js process.
+
+    menu_jquery.js - handles navigation menu animations.
+
+    d3pie - This folder holds all the fun stuff that makes the pue charts
+            work. For more information visit: d3pie.org
+
+  Cgi-bin
+
+    getUsageData.py – Collects usage data from spreadsheets for dashboards. 
+                      Sends this data as a JSON object to JavaScript AJAX calls. 
+    getCostData.py - Collects usage data from spreadsheets for dashboards. 
+                     Sends this data as a JSON object to JavaScript AJAX calls.
+
+    dataSummary.py - Collects usage data from spreadsheets for summary page.
+                     Sends this data as a JSON object to JavaScript AJAX calls.
+
+    buildings.py/.pyc – holds a dictionary used by the above python scripts. 
+                        Maps a three letter code to a buildings name as it 
+                        appears in the data spreadsheets. 
+
+    spreadsheetAccessFunctions.py/.pyc – 
+                       Set of functions used by the first three 
+                       python scripts to extract data from the spreadsheets.
+
+    getBuildingDesc.py – parses infoText.html to get building descriptions. 
+                         Gets called through AJAX in graphs.js 
+
+    infoText.xml – holds all building descriptions. 
+                     Format: <three letter code>
+                               Information about building
+                             </three letter code>  
+
+    EnergyCost-MainSub-FY12-current.xlsx and 
+      Gas-SteamCost-SteamPlant-FY12-current.xlsx – 
+               This is where all the data for the site comes from. 
+               These spreadsheets will need to be manualy updated 
+               as new data becomes available. Currently the python scripts 
+               look for files that start with “Gas” and “Energy”. 
+               As long as the file names begin with “Gas” and “Energy” 
+               and no other file uses those words the parser will find them.
+
+**SECTION 1: building and updates**
+
+A building is any campus building that this website tracks. Buildings have two 
+names and a three character code. There’s the title name, spreadsheet name, and the code.
+The title name is the name used in a building’s dashboard and menu
+element. This name is found in index.html and is not effected by 
+any other part of the site. 
+The spreadsheet name is the one that appears in the data spreadsheets. 
+This name is found in buildings.py and in the comments of infoText.xml. 
+The name of the building in the spreadsheets MUST match the name in 
+buildings.py. 
+The last identification for a building is it’s code. The first letter 
+of this code tells what kind of building it is; r = residence hall, 
+a = academic, and s = student building. The next two letters help 
+to make a unique ID for that building. A buildings three letter 
+key is found in index.html, infoText.xml, and buildings.py. 
+This three letter code is used in the JavaScript call to 
+makeDashboard in index.html and is a key to the buildings description 
+and its spreadsheet name.
+
+**Changing Building Title name** – If you need to change a building’s 
+name as it appears in the dashboard or navigation menu find 
+the building in index.html and change the call to makeDashbaord 
+and the text for the navigation. 
+
+**Changing Building spreadsheet name** – If a building’s name changes in 
+the spread sheets then the old names in buidlings.py must be updated. 
+For consistency it is also recommended that the be changed in the 
+comments of infoText.xml.
+
+**Changing Building Code** - If a building needs a new code or 
+you are adding a new building it must be giving a three letter code. 
+This code appears in index.html in the call to makeDashboard. It also 
+must be in buildings.py as a key to the buildings name as it appears 
+in the spreadsheets.
+
+**UPDATING DATA IN SPREADSHEETS** - To add new spreadsheets overwrite 
+ones in cgi-bin with the new ones. Name for electric spreadsheet 
+MUST start with "Energy". Name for steam spreadsheet MUST start with "Gas".
+
+**SECTION 2: graphs**
+All bar charts generated by the website use Dimple, an API for D3. For
+information on this API please visit: dimplejs.org
+
+The pie charts are made with d3pie, another API for D3. information
+can be found here: d3pie.org
+
+Both of the graphs are created using a JSON object that contains all the data that is being 
+represented in the graphs. 
+
+**SECTION 3: Screenshots for A.S. Displays**
+See README in TVScreenshots.
+
+**SECTION 4: AJAX Calls**
+The site has multiple AJAX calls. Following is a list of all the URL locations for these calls that may need changing if site moves.
+
+graphs.js: Around line 36 in getBuildingJSON, there are two.
+graphs.js: Around line 385 in makeDashboards.
+summary.js: Around line 8 in getSummaryJSON.
+screenshotGraphs.js: Around line 52 in getBuildingJSON, there are two.

@@ -1,0 +1,68 @@
+
+
+#utilmenu
+nav {
+	padding: 10 0px; 
+	list-style: none;
+	position: relative;
+   float: center;
+   text-align:center;
+}
+
+button {
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#000;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+input[type="radio"] {
+    margin  : 0;
+    padding : 0;
+    opacity : 0;
+
+}
+
+/*radio images from
+https://github.com/fronteed/iCheck
+*/
+input[type="radio"] + label {
+    margin: 0;
+    clear: none;
+    padding: 5px 0 4px 24px;
+    cursor: pointer;
+    background: url(../images/off.png) left center no-repeat;
+}
+input[type="radio"]:checked + label {
+   background-image: url(../images/radio.png);
+}
+
+select {
+
+   border: 1px solid #111;
+   background: transparent;
+   width: 150px;
+   padding: 5px 35px 5px 5px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: 30px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+/* image from: http://www.clker.com/clipart-down-yellow-arrow-icon.html */
+    background: url(../images/down-arrow.png) 96% / 15% no-repeat #eee;
+} 
+
